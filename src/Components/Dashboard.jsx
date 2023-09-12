@@ -4,11 +4,14 @@ import { Button, Layout, theme, Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 import {
   MenuFoldOutlined,
+  DashOutlined,
+  BookOutlined,
   MenuUnfoldOutlined,
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
   SettingOutlined
+
   
 } from "@ant-design/icons";
 import { Footer } from "antd/es/layout/layout";
@@ -43,12 +46,12 @@ function Dashboard() {
           items={[
             {
               key: "1",
-              icon: <UserOutlined />,
+              icon: <DashOutlined />,
               label: "Dashboard",
             },
             {
               key: "2",
-              icon: <VideoCameraOutlined />,
+              icon: <BookOutlined/>,
               label: "Assessments",
             },
             {

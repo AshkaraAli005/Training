@@ -1,12 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Form, Input, Button, Row, Col, Typography, message } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Typography,
+  message,
+  Layout,
+  theme,
+} from "antd";
 
 const { Title } = Typography;
+const { Header, Content, Sider } = Layout;
+import Headers from "./Header";
 
 function Register() {
   const [formdata, setFormdata] = useState("");
   const nav = useNavigate();
+
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
 
   const onFinish = () => {
     if (localStorage.getItem(formdata.email)) {
@@ -25,18 +41,30 @@ function Register() {
   };
 
   return (
-    <div>
+    <div style={{ margin: "auto" }}>
+       
+        <Headers />
+        <Layout>
+        <Content
+          style={{
+            padding: 24,
+            margin: 0,
+            marginTop: 50,
+          
+            background: colorBgContainer,
+          }}
+        >
+          <div style={{display:"flex" ,justifyContent:"center", alignItems:"center"}}>
+          <div style={{ width:"600px",margin:"auto"}} >
       <Title>Sign Up</Title>
       <Form
         name="basic"
-        labelCol={{
-          span: 8,
-        }}
+
         wrapperCol={{
           span: 16,
         }}
         style={{
-          maxWidth: 600,
+          maxWidth: 800,
         }}
         initialValues={{
           remember: true,
@@ -93,6 +121,10 @@ function Register() {
           Already have an account? <a href="/login">Login here</a>.
         </p>
       </Form>
+      </div>
+      </div>
+      </Content>
+      </Layout>
     </div>
   );
 }
