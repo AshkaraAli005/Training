@@ -33,7 +33,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Register />} />
         <Route element={<PrivateRoute />}>
-          <Route path="/Mainpage/*" element={<Mainpage />}></Route>
+          <Route path="/*" element={<Mainpage />}></Route>
         </Route>
       </Routes>
       {/* </Content>

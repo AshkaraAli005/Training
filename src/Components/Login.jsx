@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input, Typography, Layout, theme } from "antd";
 import { useNavigate } from "react-router-dom";
 const { Header, Content, Sider } = Layout;
 import Headers from "./Header";
-import { LockOutlined ,UserOutlined  } from "@ant-design/icons";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 
 function Login() {
   const { Title } = Typography;
@@ -63,76 +63,38 @@ function Login() {
         >
           <div
             style={{
+              margin: "inherit",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-                {/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-      <Form
-        name="login"
-        onFinish={handleSubmit}
-        initialValues={{ remember: true }}
-        style={{
-          width: '420px',
-          background: 'transparent',
-          border: '2px solid rgba(255, 255, 255, .2)',
-          backdropFilter: 'blur(20px)',
-          boxShadow: '0 0 10px rgba(0, 0, 0, .2)',
-          color: '#fff',
-          borderRadius: '10px',
-          padding: '30px 40px',
-        }}
-      >
-        <h1 style={{ fontSize: '36px', textAlign: 'center' }}><Title>Login</Title></h1>
-        <Form.Item
-          name="username"
-          rules={[{ required: true, message: 'Please input your username!' }]}
-          style={{ width: '100%', marginTop: '20px' }}
-        >
-          <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
-          />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: 'Please input your password!' }]}
-          style={{ width: '100%', marginTop: '20px' }}
-        >
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Item>
-        <Form.Item style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14.5px', margin: '15px 5px 15px' }}>
-          <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
-          <a href="#">Forgot password</a>
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%', height: '45px', borderRadius: '40px' }}>
-            Log in
-          </Button>
-        </Form.Item>
-        <div style={{ fontSize: '14.5px', textAlign: 'center', margin: '20px 0 15px' }}>
-          <p>
-            Don't have an account? <a href="#">Register now</a>
-          </p>
-        </div>
-      </Form>
-      </div> */}
-             <div style={{ width: "600px", margin: "auto" }}>
-              <Title>Login</Title>
+            <div
+              style={{
+                width: "600px",
+                background: "transparent",
+                border: "2px solid rgba(255, 255, 255, .2)",
+                backdropFilter: "blur(20px)",
+                boxShadow: "0 0 10px rgba(0, 0, 0, .2)",
+                color: "#fff",
+                borderRadius: "10px",
+                padding: "30px 40px",
+                paddingLeft: "200px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Title style={{ marginLeft: "-200px" }}>Login</Title>
+
               <Form
                 name="basic"
                 wrapperCol={{
                   span: 16,
                 }}
                 style={{
-                  maxWidth: 600,
+                  width: "600px",
                 }}
                 initialValues={{
                   remember: true,
@@ -186,7 +148,7 @@ function Login() {
                   </Button>
                 </Form.Item>
               </Form>
-            </div> 
+            </div>
           </div>
         </Content>
       </Layout>

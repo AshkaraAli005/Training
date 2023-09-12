@@ -42,88 +42,114 @@ function Register() {
 
   return (
     <div style={{ margin: "auto" }}>
-       
-        <Headers />
-        <Layout>
+      <Headers />
+      <Layout>
         <Content
           style={{
             padding: 24,
             margin: 0,
             marginTop: 50,
-          
+            height: "90vh",
             background: colorBgContainer,
           }}
         >
-          <div style={{display:"flex" ,justifyContent:"center", alignItems:"center"}}>
-          <div style={{ width:"600px",margin:"auto"}} >
-      <Title>Sign Up</Title>
-      <Form
-        name="basic"
-
-        wrapperCol={{
-          span: 16,
-        }}
-        style={{
-          maxWidth: 800,
-        }}
-        initialValues={{
-          remember: true,
-        }}
-        onFinish={onFinish}
-      >
-        <Form.Item
-          rules={[{ required: true, message: "Please enter your name!" }]}
-        >
-          <Input
-            name="name"
-            value={formdata.name}
-            placeholder="Name"
-            onChange={handleChange}
-          />
-        </Form.Item>
-        <Form.Item
-          rules={[
-            { required: true, message: "Please enter your email!" },
-            {
-              type: "email",
-              message: "Please enter a valid email address!",
-            },
-          ]}
-        >
-          <Input
-            name="email"
-            value={formdata.email}
-            placeholder="Email"
-            onChange={handleChange}
-          />
-        </Form.Item>
-        <Form.Item
-          rules={[{ required: true, message: "Please enter your password!" }]}
-        >
-          <Input.Password
-            name="password"
-            value={formdata.Password}
-            placeholder="Password"
-            onChange={handleChange}
-          />
-        </Form.Item>
-        <Form.Item
-          wrapperCol={{
-            offset: 5,
-            span: 16,
-          }}
-        >
-          <Button type="primary" htmlType="submit">
-            Sign up
-          </Button>
-        </Form.Item>
-        <p>
-          Already have an account? <a href="/login">Login here</a>.
-        </p>
-      </Form>
-      </div>
-      </div>
-      </Content>
+          <div
+            style={{
+              margin: "inherit",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                width: "600px",
+                background: "transparent",
+                border: "2px solid rgba(255, 255, 255, .2)",
+                backdropFilter: "blur(20px)",
+                boxShadow: "0 0 10px rgba(0, 0, 0, .2)",
+                color: "#fff",
+                borderRadius: "10px",
+                padding: "30px 40px",
+                paddingLeft: "200px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Title style={{ marginLeft: "-200px" }}>Sign Up</Title>
+              <Form
+                name="basic"
+                wrapperCol={{
+                  span: 16,
+                }}
+                style={{
+                  width: "600px",
+                }}
+                initialValues={{
+                  remember: true,
+                }}
+                onFinish={onFinish}
+                autoComplete="off"
+              >
+                <Form.Item
+                  rules={[
+                    { required: true, message: "Please enter your name!" },
+                  ]}
+                >
+                  <Input
+                    name="name"
+                    value={formdata.name}
+                    placeholder="Name"
+                    onChange={handleChange}
+                  />
+                </Form.Item>
+                <Form.Item
+                  rules={[
+                    { required: true, message: "Please enter your email!" },
+                    {
+                      type: "email",
+                      message: "Please enter a valid email address!",
+                    },
+                  ]}
+                >
+                  <Input
+                    name="email"
+                    value={formdata.email}
+                    placeholder="Email"
+                    onChange={handleChange}
+                  />
+                </Form.Item>
+                <Form.Item
+                  rules={[
+                    { required: true, message: "Please enter your password!" },
+                  ]}
+                >
+                  <Input.Password
+                    name="password"
+                    value={formdata.Password}
+                    placeholder="Password"
+                    onChange={handleChange}
+                  />
+                </Form.Item>
+                <Form.Item
+                  wrapperCol={{
+                    offset: 5,
+                    span: 16,
+                  }}
+                >
+                  <Button type="primary" htmlType="submit">
+                    Sign up
+                  </Button>
+                </Form.Item>
+                <p>
+                  Already have an account? <a href="/login">Login here</a>.
+                </p>
+              </Form>
+            </div>
+          </div>
+        </Content>
       </Layout>
     </div>
   );

@@ -15,7 +15,7 @@ import {
 } from "@ant-design/icons";
 
 function Mainpage() {
-  const [selectedkey,setket] = useState("/Mainpage/Appointments")
+  const [selectedkey, setket] = useState("/Mainpage/Appointments");
   const nav = useNavigate();
   const {
     token: { colorBgContainer },
@@ -60,41 +60,36 @@ function Mainpage() {
                 nav(key);
               }
             }}
-            
             items={[
               {
                 label: "Dashboard",
-                key: "/Mainpage/Dashboard",
+                key: "/Dashboard",
                 icon: <DashboardOutlined style={{ fontSize: 20 }} />,
               },
               {
                 label: "Assessments",
-                key: "/Mainpage/Assessments",
+                key: "/Assessments",
                 icon: <FileTextOutlined style={{ fontSize: 20 }} />,
               },
               {
                 label: "Health Info",
-                key: "/Mainpage/Health_Info",
+                key: "/Health_Info",
                 icon: <InfoCircleOutlined style={{ fontSize: 20 }} />,
-               
               },
               {
                 label: "Appoinments",
-                key: "/Mainpage/Appointments",
+                key: "/Appointments",
                 icon: <CalendarOutlined style={{ fontSize: 20 }} />,
-                path: "/mainpage/Appointments",
               },
               {
                 label: "Subscribtion Plans",
-                key: "/Mainpage/SubcPlans",
+                key: "/SubcPlans",
                 icon: <CrownOutlined style={{ fontSize: 20 }} />,
-                path: "/mainpage/SubcPlans",
               },
               {
                 label: "Settings",
-                key: "/Mainpage/Settings",
+                key: "/Settings",
                 icon: <SettingOutlined style={{ fontSize: 20 }} />,
-                path: "/mainpage/Settings",
               },
               { label: "Logout", key: "Logout", icon: <LogoutOutlined /> },
             ]}
@@ -219,15 +214,9 @@ const Contents = () => {
     <div>
       <Routes>
         <Route path="/Dashboard" element={<h2>Dashboard</h2>}></Route>
-        <Route
-          path="/Assessments"
-          element={<h2>Assessments</h2>}
-        ></Route>
+        <Route path="/Assessments" element={<h2>Assessments</h2>}></Route>
         <Route path="/Health_Info" element={<h2>Info</h2>}></Route>
-        <Route
-          path="/Appointments"
-          element={<AppinntmentCards />}
-        ></Route>
+        <Route path="/Appointments" element={<AppinntmentCards />}></Route>
         <Route path="/SubcPlans" element={<h2>Subscription Plans</h2>}></Route>
         <Route path="/Settings" element={<h2>Settings</h2>}></Route>
       </Routes>
