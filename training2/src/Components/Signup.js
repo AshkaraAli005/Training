@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Headers from "./Header";
 import { useNavigate } from "react-router-dom";
 import {
   Form,
@@ -13,7 +14,6 @@ import {
 
 const { Title } = Typography;
 const { Header, Content, Sider } = Layout;
-import Headers from "./Header";
 
 function Register() {
   const [formdata, setFormdata] = useState("");
@@ -23,7 +23,7 @@ function Register() {
   const onRadio = (e) => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
-    setFormdata({ ...formdata, "role": e.target.value });
+    setFormdata({ ...formdata, role: e.target.value });
   };
 
   const {
@@ -37,7 +37,7 @@ function Register() {
       localStorage.setItem(formdata.email, JSON.stringify(formdata));
       console.log(formdata);
       setFormdata({});
-      nav("/login");
+      nav("/");
     }
   };
 
@@ -84,7 +84,9 @@ function Register() {
                 alignItems: "center",
               }}
             >
-              <Title style={{ marginLeft: "-200px" }}>Sign Up</Title>
+              <Title style={{ marginLeft: "-200px", color: "#459c22" }}>
+                Sign Up
+              </Title>
               <Form
                 name="basic"
                 wrapperCol={{
@@ -107,6 +109,11 @@ function Register() {
                   <Input
                     name="name"
                     value={formdata.name}
+                    style={{
+                      height: "50px",
+                      fontSize: "15px",
+                      borderColor: "#88da68",
+                    }}
                     placeholder="Name"
                     onChange={handleChange}
                   />
@@ -123,6 +130,11 @@ function Register() {
                   <Input
                     name="email"
                     value={formdata.email}
+                    style={{
+                      height: "50px",
+                      fontSize: "15px",
+                      borderColor: "#88da68",
+                    }}
                     placeholder="Email"
                     onChange={handleChange}
                   />
@@ -135,6 +147,11 @@ function Register() {
                   <Input.Password
                     name="password"
                     value={formdata.Password}
+                    style={{
+                      height: "50px",
+                      fontSize: "15px",
+                      borderColor: "#88da68",
+                    }}
                     placeholder="Password"
                     onChange={handleChange}
                   />
@@ -156,12 +173,17 @@ function Register() {
                     span: 16,
                   }}
                 >
-                  <Button type="primary" htmlType="submit">
+                  <Button
+                    type="primary"
+                    size="large"
+                    style={{ backgroundColor: "#459c22" ,marginLeft: "40px " }}
+                    htmlType="submit"
+                  >
                     Sign up
                   </Button>
                 </Form.Item>
                 <p>
-                  Already have an account? <a href="/login">Login here</a>.
+                  Already have an account? <a href="/" style={{color:"green"}}>Login here</a>.
                 </p>
               </Form>
             </div>

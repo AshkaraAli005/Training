@@ -1,61 +1,66 @@
 import React, { useState } from "react";
+import { Button, Checkbox, Form, Input, Typography, Layout, theme } from "antd";
 import { useNavigate } from "react-router-dom";
-import {
-  Form,
-  Input,
-  Button,
-  Typography,
-  message,
-  Layout,
-  theme,
-  Radio,
-} from "antd";
-
-const { Title } = Typography;
-const { Header, Content, Sider } = Layout;
 import Headers from "./Header";
+const { Header, Content, Sider } = Layout;
 
-function Register() {
-  const [formdata, setFormdata] = useState("");
-  const nav = useNavigate();
-
-  const [value, setValue] = useState(1);
-  const onRadio = (e) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
-    setFormdata({ ...formdata, "role": e.target.value });
-  };
+function Login() {
+  const { Title } = Typography;
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const onFinish = () => {
-    if (localStorage.getItem(formdata.email)) {
-      alert("email already exist");
-    } else {
-      localStorage.setItem(formdata.email, JSON.stringify(formdata));
-      console.log(formdata);
-      setFormdata({});
-      nav("/login");
-    }
-  };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormdata({ ...formdata, [name]: value });
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const nav = useNavigate();
+
+  const handleSubmit = () => {
+    console.log(formData);
+    let ls = localStorage.getItem(formData.email) || {
+      email: "email not found",
+    };
+    let user = JSON.parse(ls);
+
+    if (user.email == "email not found") {
+      alert("user not found");
+    } else {
+      if (user.password == formData.password) {
+        localStorage.setItem("token", JSON.stringify(user.email));
+        if(user.role == "doctor"){
+          nav("/doctor")
+        }else {
+          nav("/patient")
+        }
+      } else {
+        alert("invalid password");
+      }
+    }
+    setFormData({});
   };
 
   return (
-    <div style={{ margin: "auto" }}>
-      <Headers />
+    <div
+      style={{
+        margin: "auto",
+      }}
+    >
       <Layout>
+        <Headers />
+
         <Content
           style={{
             padding: 24,
             margin: 0,
             marginTop: 50,
-            height: "90vh",
+            minHeight: 280,
             background: colorBgContainer,
           }}
         >
@@ -84,7 +89,8 @@ function Register() {
                 alignItems: "center",
               }}
             >
-              <Title style={{ marginLeft: "-200px" }}>Sign Up</Title>
+              <Title style={{ marginLeft: "-200px" ,color:"#459c22" }}>Login</Title>
+
               <Form
                 name="basic"
                 wrapperCol={{
@@ -96,73 +102,57 @@ function Register() {
                 initialValues={{
                   remember: true,
                 }}
-                onFinish={onFinish}
+                onFinish={handleSubmit}
                 autoComplete="off"
               >
                 <Form.Item
                   rules={[
-                    { required: true, message: "Please enter your name!" },
-                  ]}
-                >
-                  <Input
-                    name="name"
-                    value={formdata.name}
-                    placeholder="Name"
-                    onChange={handleChange}
-                  />
-                </Form.Item>
-                <Form.Item
-                  rules={[
-                    { required: true, message: "Please enter your email!" },
                     {
-                      type: "email",
-                      message: "Please enter a valid email address!",
+                      required: true,
+                      message: "Please input your username!",
                     },
                   ]}
                 >
                   <Input
                     name="email"
-                    value={formdata.email}
-                    placeholder="Email"
+                    value={formData.email}
+                    
+                    style={{height:"50px",fontSize:"15px", borderColor:"#88da68"}}
                     onChange={handleChange}
+                    placeholder="Email"
                   />
                 </Form.Item>
+
                 <Form.Item
                   rules={[
-                    { required: true, message: "Please enter your password!" },
+                    {
+                      required: true,
+                      message: "Please input your password!",
+                    },
                   ]}
                 >
                   <Input.Password
                     name="password"
-                    value={formdata.Password}
-                    placeholder="Password"
+                    value={formData.password}
+                    style={{height:"50px",fontSize:"15px" ,borderColor:"#88da68"}}
                     onChange={handleChange}
+                    placeholder="Password"
                   />
                 </Form.Item>
+
                 <Form.Item
                   wrapperCol={{
                     offset: 5,
                     span: 16,
                   }}
                 >
-                  <Radio.Group onChange={onRadio} value={formdata.role}>
-                    <Radio value={"doctor"}>Doctor</Radio>
-                    <Radio value={"patient"}>Patient</Radio>
-                  </Radio.Group>
-                </Form.Item>
-                <Form.Item
-                  wrapperCol={{
-                    offset: 5,
-                    span: 16,
-                  }}
-                >
-                  <Button type="primary" htmlType="submit">
-                    Sign up
+                  <Button type="primary" size="large" style={{backgroundColor:"#459c22",}} htmlType="submit">
+                    Submit
+                  </Button>
+                  <Button type="link" size="large" style={{Color:"#459c22",}}  href="/signup">
+                    Sign Up
                   </Button>
                 </Form.Item>
-                <p>
-                  Already have an account? <a href="/login">Login here</a>.
-                </p>
               </Form>
             </div>
           </div>
@@ -172,4 +162,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;

@@ -35,7 +35,11 @@ function Login() {
     } else {
       if (user.password == formData.password) {
         localStorage.setItem("token", JSON.stringify(user.email));
-        nav("/mainpage");
+        if(user.role == "doctor"){
+          nav("/doctor")
+        }else {
+          nav("/patient")
+        }
       } else {
         alert("invalid password");
       }
@@ -86,7 +90,7 @@ function Login() {
                 alignItems: "center",
               }}
             >
-              <Title style={{ marginLeft: "-200px" }}>Login</Title>
+              <Title style={{ marginLeft: "-200px" ,color:"#459c22" }}>Login</Title>
 
               <Form
                 name="basic"
@@ -113,6 +117,7 @@ function Login() {
                   <Input
                     name="email"
                     value={formData.email}
+                    style={{height:"50px",fontSize:"20px", borderColor:"#88da68"}}
                     onChange={handleChange}
                     placeholder="Email"
                   />
@@ -129,6 +134,7 @@ function Login() {
                   <Input.Password
                     name="password"
                     value={formData.password}
+                    style={{height:"50px",fontSize:"20px" ,borderColor:"#88da68"}}
                     onChange={handleChange}
                     placeholder="Password"
                   />
@@ -140,10 +146,10 @@ function Login() {
                     span: 16,
                   }}
                 >
-                  <Button type="primary" htmlType="submit">
+                  <Button type="primary" size="large" style={{backgroundColor:"#459c22",}} htmlType="submit">
                     Submit
                   </Button>
-                  <Button type="link" href="/signup">
+                  <Button type="link"  href="/signup">
                     Sign Up
                   </Button>
                 </Form.Item>
