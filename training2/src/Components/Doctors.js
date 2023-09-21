@@ -6,13 +6,18 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Sider from "antd/es/layout/Sider";
 import {
   CalendarOutlined,
+  HomeOutlined,
   LogoutOutlined,
+  ProfileOutlined,
+  ScheduleOutlined,
   SettingOutlined,
+  TeamOutlined,
 } from "@ant-design/icons";
 
 function Doctor() {
-  const [selectedkey, setket] = useState("/doctor/Appointments");
+  const [selectedkey, setSelectedKey] = useState("/doctor/Appointments");
   const nav = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -20,84 +25,89 @@ function Doctor() {
     <div style={{ display: "flex", flexDirection: "colunm" }}>
       <Layout>
         <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}
+          className="sider1 col10"
           style={{
             backgroundColor: "white",
-            borderRadius: 10,
-            marginLeft: 3,
-            marginTop: 5,
-            boxShadow: "1px 1px 10px rgba(0,0,0,0.5)",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: "20px",
-              marginLeft: "20px",
-            }}
-          >
+          <div className={collapsed ? "shrtlogo" : "logo"}>
             <Image
-              src="niyamaimg.png"
+              src={collapsed ? "/shortlogo.jpg" : "/niyamaimg.png"}
               alt="Logo"
               preview={false}
-              style={{ width: "150px", height: "auto", marginRight: 10 }}
+              className={collapsed ? "shrtlogo" : "logo"}
             />
           </div>
           <br />
           <Menu
-            style={{ borderRadius: 20, color: "green" }}
+          className="menu"
             mode="inline"
-            defaultSelectedKeys={[selectedkey]}
+            defaultSelectedKeys={["doctor/Appointments"]}
+            defaultOpenKeys={["doctor/Appointments"]}
             onClick={({ key }) => {
               if (key === "Logout") {
                 localStorage.removeItem("token");
                 nav("/");
               } else {
                 nav(key);
+                setSelectedKey(key);
               }
             }}
             items={[
               {
-                label: "Appoinments",
+                label: "Dashboard",
+                key: "doctor/",
+                icon: <HomeOutlined style={{ fontSize: 20 }} />,
+              },
+              {
+                label: "My Appoinments",
                 key: "doctor/Appointments",
+                icon: <ScheduleOutlined style={{ fontSize: 20 }} />,
+              },
+              {
+                label: "My Avaiability",
+                key: "doctor/Availability",
                 icon: <CalendarOutlined style={{ fontSize: 20 }} />,
+              },
+              {
+                label: "My Patients",
+                key: "doctor/My_patients",
+                icon: <TeamOutlined style={{ fontSize: 20 }} />,
               },
               {
                 label: "Settings",
                 key: "doctor/Settings",
                 icon: <SettingOutlined style={{ fontSize: 20 }} />,
+                children: [
+                  {
+                    label: "Profile",
+                    key: "doctor/Profile",
+                    icon: <ProfileOutlined style={{ fontSize: 15 }} />,
+                  },
+                  {
+                    label: "Logout",
+                    key: "Logout",
+                    icon: <LogoutOutlined style={{ fontSize: 15 }} />,
+                  },
+                ],
               },
-              { label: "Logout", key: "Logout", icon: <LogoutOutlined /> },
             ]}
           ></Menu>
         </Sider>
-        <Content>
+        <Content className="main-content">
           <div style={{ display: "flex", flexDirection: "column" }}>
             <Layout>
               <Header
+                className="main-header"
                 style={{
-                  borderRadius: 10,
-                  marginLeft: "7px",
-                  marginRight: "6px",
-                  marginTop: "5px",
-                  backgroundColor: "white",
-                  paddingBottom: 10,
-                  width: "84vw",
-                  display: "flex",
-                  alignItems: "center",
-                  boxShadow: "1px 1px 10px rgba(0,0,0,0.5)  ",
-
                   background: colorBgContainer,
+                  
                 }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginBottom: 10,
-                    marginLeft: -20,
-                  }}
-                >
+                <div className="typo-header">
                   <Typography.Title>
                     <Headers />
                   </Typography.Title>
@@ -105,16 +115,10 @@ function Doctor() {
               </Header>
             </Layout>
             <Content
+              className="main-content2"
               style={{
-                margin: "5px 10px 5px 5px",
-                padding: 24,
-                minHeight: 280,
                 background: colorBgContainer,
-                height: "85vh",
-                width: "84vw",
-                borderRadius: 10,
-                overflowY: "auto",
-                boxShadow: "1px 1px 10px rgba(0,0,0,0.5) ",
+                borderRadius: "5px",
               }}
             >
               <Contents />
@@ -133,17 +137,41 @@ const Headers = () => {
     <div>
       <Routes>
         <Route
+          path="/doctor/"
+          element={
+            <h2 className="head_text">
+              Dashboard
+            </h2>
+          }
+        ></Route>
+        <Route
           path="/doctor/Appointments"
           element={
-            <h2 style={{ color: "green", fontFamily: "monospace" }}>
+            <h2 className="head_text">
               Appointments
+            </h2>
+          }
+        ></Route>
+        <Route
+          path="/doctor/Availability"
+          element={
+            <h2 className="head_text">
+              My Availability
+            </h2>
+          }
+        ></Route>
+        <Route
+          path="/doctor/My_patients"
+          element={
+            <h2 className="head_text">
+              My Patients
             </h2>
           }
         ></Route>
         <Route
           path="/doctor/Settings"
           element={
-            <h2 style={{ color: "green", fontFamily: "monospace" }}>
+            <h2 className="head_text">
               Settings
             </h2>
           }
@@ -157,7 +185,10 @@ const Contents = () => {
   return (
     <div>
       <Routes>
-        <Route path="/doctor/Appointments" element={<AppinntmentCards />}></Route>
+        <Route
+          path="/doctor/Appointments"
+          element={<AppinntmentCards />}
+        ></Route>
         <Route path="/doctor/Settings" element={<h2>Settings</h2>}></Route>
       </Routes>
     </div>

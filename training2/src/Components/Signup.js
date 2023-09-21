@@ -1,21 +1,13 @@
 import React, { useState } from "react";
 import Headers from "./Header";
+import Inputfields from "./Inputfields";
 import { useNavigate } from "react-router-dom";
-import {
-  Form,
-  Input,
-  Button,
-  Typography,
-  message,
-  Layout,
-  theme,
-  Radio,
-} from "antd";
+import { Form, Button, Typography, Layout, theme, Radio, message } from "antd";
 
 const { Title } = Typography;
-const { Header, Content, Sider } = Layout;
+const { Content } = Layout;
 
-function Register() {
+const Register = () => {
   const [formdata, setFormdata] = useState("");
   const nav = useNavigate();
 
@@ -31,12 +23,52 @@ function Register() {
   } = theme.useToken();
 
   const onFinish = () => {
-    if (localStorage.getItem(formdata.email)) {
-      alert("email already exist");
+    let regname = /^[a-zA-Z\-]+$/;
+
+    let regemail =
+      /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+    let regpassword =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
+
+    if (regname.test(formdata.name) == false) {
+      message.warning("please enter valid name");
+    } else if (localStorage.getItem(formdata.email)) {
+      message.warning("email already exists");
+    } else if (regemail.test(formdata.email) == false) {
+      message.warning("Invalid Email Address");
+    } else if (regpassword.test(formdata.password) == false) {
+      message.warning(
+        <>
+          <p>
+            Password contains at least 8 characters and at most 20 characters.
+          </p>
+          <p> It contains at least one digit.</p>
+          <p> It contains at least one upper case alphabet.</p>
+          <p> It contains at least one lower case alphabet.</p>
+          <p>
+            {" "}
+            It contains at least one special character which includes
+            !@#$%&*()-+=^.
+          </p>
+          <p>It doesn’t contain any white space.</p>
+        </>
+      );
     } else {
       localStorage.setItem(formdata.email, JSON.stringify(formdata));
+
+      let all = JSON.parse(localStorage.getItem("alluser")) || [];
+
+      localStorage.setItem(
+        "alluser",
+
+        JSON.stringify([...all, formdata.email])
+      );
+
       console.log(formdata);
+
       setFormdata({});
+
       nav("/");
     }
   };
@@ -51,39 +83,13 @@ function Register() {
       <Headers />
       <Layout>
         <Content
+          className="form-content"
           style={{
-            padding: 24,
-            margin: 0,
-            marginTop: 50,
-            height: "90vh",
             background: colorBgContainer,
           }}
         >
-          <div
-            style={{
-              margin: "inherit",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                width: "600px",
-                background: "transparent",
-                border: "2px solid rgba(255, 255, 255, .2)",
-                backdropFilter: "blur(20px)",
-                boxShadow: "0 0 10px rgba(0, 0, 0, .2)",
-                color: "#fff",
-                borderRadius: "10px",
-                padding: "30px 40px",
-                paddingLeft: "200px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+          <div className="form-div1">
+            <div className="form">
               <Title style={{ marginLeft: "-200px", color: "#459c22" }}>
                 Sign Up
               </Title>
@@ -101,61 +107,22 @@ function Register() {
                 onFinish={onFinish}
                 autoComplete="off"
               >
-                <Form.Item
-                  rules={[
-                    { required: true, message: "Please enter your name!" },
-                  ]}
-                >
-                  <Input
-                    name="name"
-                    value={formdata.name}
-                    style={{
-                      height: "50px",
-                      fontSize: "15px",
-                      borderColor: "#88da68",
-                    }}
-                    placeholder="Name"
-                    onChange={handleChange}
-                  />
-                </Form.Item>
-                <Form.Item
-                  rules={[
-                    { required: true, message: "Please enter your email!" },
-                    {
-                      type: "email",
-                      message: "Please enter a valid email address!",
-                    },
-                  ]}
-                >
-                  <Input
-                    name="email"
-                    value={formdata.email}
-                    style={{
-                      height: "50px",
-                      fontSize: "15px",
-                      borderColor: "#88da68",
-                    }}
-                    placeholder="Email"
-                    onChange={handleChange}
-                  />
-                </Form.Item>
-                <Form.Item
-                  rules={[
-                    { required: true, message: "Please enter your password!" },
-                  ]}
-                >
-                  <Input.Password
-                    name="password"
-                    value={formdata.Password}
-                    style={{
-                      height: "50px",
-                      fontSize: "15px",
-                      borderColor: "#88da68",
-                    }}
-                    placeholder="Password"
-                    onChange={handleChange}
-                  />
-                </Form.Item>
+                <Inputfields
+                  name={"name"}
+                  value={formdata.name}
+                  fun={handleChange}
+                />
+                <Inputfields
+                  name={"email"}
+                  value={formdata.email}
+                  fun={handleChange}
+                />
+
+                <Inputfields
+                  name={"password"}
+                  value={formdata.Password}
+                  fun={handleChange}
+                />
                 <Form.Item
                   wrapperCol={{
                     offset: 5,
@@ -176,14 +143,18 @@ function Register() {
                   <Button
                     type="primary"
                     size="large"
-                    style={{ backgroundColor: "#459c22" ,marginLeft: "40px " }}
+                    style={{ backgroundColor: "#459c22", marginLeft: "40px " }}
                     htmlType="submit"
                   >
                     Sign up
                   </Button>
                 </Form.Item>
                 <p>
-                  Already have an account? <a href="/" style={{color:"green"}}>Login here</a>.
+                  Already have an account?{" "}
+                  <a href="/" style={{ color: "green" }}>
+                    Login here
+                  </a>
+                  .
                 </p>
               </Form>
             </div>
@@ -192,6 +163,6 @@ function Register() {
       </Layout>
     </div>
   );
-}
+};
 
 export default Register;

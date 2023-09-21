@@ -1,0 +1,137 @@
+.header {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 7;
+}
+.header-div1 {
+  display: flex;
+  align-items: center;
+}
+
+.header-img {
+  width: 200px;
+  height: auto;
+  margin-right: 10;
+}
+
+.form {
+  width: 600px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  border-radius: 10px;
+  padding: 30px 40px;
+  padding-left: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-div1 {
+  margin: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-content {
+  padding: 24;
+  margin: 0;
+  margin-top: 50px;
+  min-height: 280;
+}
+.input-field {
+  height: 50px;
+  font-size: 15px;
+  border-color: #88da68;
+}
+
+.main-header {
+  background-color: white;
+  padding-bottom: 10px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid rgb(234, 236, 240);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.typo-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  color: #88da68;
+  margin-left: -20px;
+}
+.main-content2 {
+  padding: 24px;
+  min-height: 280;
+  height: 85vh;
+
+  overflow-y: auto;
+}
+.sider1 {
+  overflow: auto;
+  height: 100hv;
+  position: sticky;
+  top: 0px;
+  left: 0px;
+  border-right: 2px solid rgb(234, 236, 240);
+}
+
+.main-content {
+  width: 75vw;
+}
+
+.card-info-btn {
+  width: 150px;
+}
+.shrtlogo {
+  width: 40px;
+}
+.logo {
+  width: 150px;
+}
+.shrtlogo,
+.logo {
+  height: auto;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: px;
+}
+.ant-layout-sider-trigger:hover {
+  background: #88da68;
+  color: #000000;
+  color: rgb(88, 88, 88); /* Change the hover color if needed */
+}
+
+.ant-layout-sider-trigger {
+  background-color: #88da68;
+}
+
+.menu {
+  border-radius: 20px;
+  font-size: small;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: rgb(88, 88, 88);
+  font-weight: bold;
+}
+
+.head_text {
+  color: #d80000;
+  font-weight: lighter;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}

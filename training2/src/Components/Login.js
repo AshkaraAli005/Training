@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Button, Checkbox, Form, Input, Typography, Layout, theme } from "antd";
+import Inputfields from "./Inputfields";
+import { Button, Form, Input, Typography, Layout, theme ,message} from "antd";
 import { useNavigate } from "react-router-dom";
 import Headers from "./Header";
-const { Header, Content, Sider } = Layout;
+import "./All.css";
+const { Content } = Layout;
 
 function Login() {
   const { Title } = Typography;
@@ -24,26 +26,26 @@ function Login() {
 
   const handleSubmit = () => {
     console.log(formData);
-    let ls = localStorage.getItem(formData.email) || {
-      email: "email not found",
-    };
+    let ls = localStorage.getItem(formData.email) ||'{ "email": "email not found" }'
+  ;
     let user = JSON.parse(ls);
 
     if (user.email == "email not found") {
-      alert("user not found");
-    } else {
-      if (user.password == formData.password) {
-        localStorage.setItem("token", JSON.stringify(user.email));
-        if(user.role == "doctor"){
-          nav("/doctor")
-        }else {
-          nav("/patient")
-        }
+      message.error("user not found");
+    } else if (user.password == formData.password) {
+      localStorage.setItem("token", JSON.stringify(user.email));
+      if (user.role == "doctor") {
+        nav("/doctor");
+        message.success(`welcome , ${user.name}`)
       } else {
-        alert("invalid password");
+        nav("/patient");
+        message.success(`welcome , ${user.name}`)
       }
+    } else {
+      message.error("invalid password");
     }
-    setFormData({});
+
+    // setFormData({});
   };
 
   return (
@@ -56,40 +58,14 @@ function Login() {
         <Headers />
 
         <Content
-          style={{
-            padding: 24,
-            margin: 0,
-            marginTop: 50,
-            minHeight: 280,
-            background: colorBgContainer,
-          }}
+          className="form-content"
+          style={{ background: colorBgContainer }}
         >
-          <div
-            style={{
-              margin: "inherit",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                width: "600px",
-                background: "transparent",
-                border: "2px solid rgba(255, 255, 255, .2)",
-                backdropFilter: "blur(20px)",
-                boxShadow: "0 0 10px rgba(0, 0, 0, .2)",
-                color: "#fff",
-                borderRadius: "10px",
-                padding: "30px 40px",
-                paddingLeft: "200px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Title style={{ marginLeft: "-200px" ,color:"#459c22" }}>Login</Title>
+          <div className="form-div1">
+            <div className="form">
+              <Title style={{ marginLeft: "-200px", color: "#459c22" }}>
+                Login
+              </Title>
 
               <Form
                 name="basic"
@@ -105,40 +81,16 @@ function Login() {
                 onFinish={handleSubmit}
                 autoComplete="off"
               >
-                <Form.Item
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your username!",
-                    },
-                  ]}
-                >
-                  <Input
-                    name="email"
-                    value={formData.email}
-                    
-                    style={{height:"50px",fontSize:"15px", borderColor:"#88da68"}}
-                    onChange={handleChange}
-                    placeholder="Email"
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your password!",
-                    },
-                  ]}
-                >
-                  <Input.Password
-                    name="password"
-                    value={formData.password}
-                    style={{height:"50px",fontSize:"15px" ,borderColor:"#88da68"}}
-                    onChange={handleChange}
-                    placeholder="Password"
-                  />
-                </Form.Item>
+                <Inputfields
+                  name={'email'}
+                  value={formData.email}
+                  fun={handleChange}
+                />
+                <Inputfields
+                  name={'password'}
+                  value={formData.password}
+                  fun={handleChange}
+                />
 
                 <Form.Item
                   wrapperCol={{
@@ -146,10 +98,20 @@ function Login() {
                     span: 16,
                   }}
                 >
-                  <Button type="primary" size="large" style={{backgroundColor:"#459c22",}} htmlType="submit">
+                  <Button
+                    type="primary"
+                    size="large"
+                    style={{ backgroundColor: "#459c22" }}
+                    htmlType="submit"
+                  >
                     Submit
                   </Button>
-                  <Button type="link" size="large" style={{Color:"#459c22",}}  href="/signup">
+                  <Button
+                    type="link"
+                    size="large"
+                    style={{ Color: "#459c22" }}
+                    href="/signup"
+                  >
                     Sign Up
                   </Button>
                 </Form.Item>

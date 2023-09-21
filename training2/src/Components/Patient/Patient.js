@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AppinntmentCards from "./AppinntmentCards";
+import Contents from "./Pcontents";
 import { Layout, Menu, Typography, theme, Image } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -12,50 +12,46 @@ import {
   InfoCircleOutlined,
   LogoutOutlined,
   SettingOutlined,
+  RightOutlined,
+  LeftOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 
-function Mainpage() {
+const Patient = () => {
   const [selectedkey, setket] = useState("/Mainpage/Appointments");
   const nav = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
   return (
     <div style={{ display: "flex", flexDirection: "colunm" }}>
-      <Layout>
+      <Layout style={{ minHeight: "100vh" }}>
         <Sider
-          style={{
-            backgroundColor: "white",
-            borderRadius: 10,
-            marginLeft: 3,
-            marginTop: 5,
-            boxShadow: "1px 1px 10px rgba(0,0,0,0.5)",
-          }}
+          collapsible
+          collapsed={collapsed}
+          onCollapse={(value) => setCollapsed(value)}
+          className="sider1"
+          style={{ backgroundColor: "white" }}
         >
-          <div
-            style={{
-              display: "flex",
-              alignItems: "center",
-              marginTop: "20px",
-              marginLeft: "20px",
-            }}
-          >
+          <div className={collapsed ? "shrtlogo" : "logo"}>
             <Image
-              src="public/niyamaimg.png"
+              src={collapsed ? "/shortlogo.jpg" : "/niyamaimg.png"}
               alt="Logo"
               preview={false}
-              style={{ width: "150px", height: "auto", marginRight: 10 }}
+              className={collapsed ? "shrtlogo" : "logo"}
             />
           </div>
           <br />
           <Menu
-            style={{ borderRadius: 20, color: "green" }}
+            className="menu"
             mode="inline"
             defaultSelectedKeys={[selectedkey]}
             onClick={({ key }) => {
               if (key === "Logout") {
                 localStorage.removeItem("token");
-                nav("/login");
+                nav("/");
               } else {
                 nav(key);
               }
@@ -63,32 +59,32 @@ function Mainpage() {
             items={[
               {
                 label: "Dashboard",
-                key: "/Dashboard",
-                icon: <DashboardOutlined style={{ fontSize: 20 }} />,
+                key: "patient/Dashboard",
+                icon: <HomeOutlined style={{ fontSize: 20 }} />,
               },
               {
                 label: "Assessments",
-                key: "/Assessments",
+                key: "patient/Assessments",
                 icon: <FileTextOutlined style={{ fontSize: 20 }} />,
               },
               {
                 label: "Health Info",
-                key: "/Health_Info",
+                key: "patient/Health_Info",
                 icon: <InfoCircleOutlined style={{ fontSize: 20 }} />,
               },
               {
                 label: "Appoinments",
-                key: "/Appointments",
+                key: "patient/Appointments",
                 icon: <CalendarOutlined style={{ fontSize: 20 }} />,
               },
               {
                 label: "Subscribtion Plans",
-                key: "/SubcPlans",
+                key: "patient/SubcPlans",
                 icon: <CrownOutlined style={{ fontSize: 20 }} />,
               },
               {
                 label: "Settings",
-                key: "/Settings",
+                key: "patient/Settings",
                 icon: <SettingOutlined style={{ fontSize: 20 }} />,
               },
               { label: "Logout", key: "Logout", icon: <LogoutOutlined /> },
@@ -99,29 +95,12 @@ function Mainpage() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <Layout>
               <Header
+                className="main-header"
                 style={{
-                  borderRadius: 10,
-                  marginLeft: "7px",
-                  marginRight: "6px",
-                  marginTop: "5px",
-                  backgroundColor: "white",
-                  paddingBottom: 10,
-                  width: "84vw",
-                  display: "flex",
-                  alignItems: "center",
-                  boxShadow: "1px 1px 10px rgba(0,0,0,0.5)  ",
-
                   background: colorBgContainer,
                 }}
               >
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    marginBottom: 10,
-                    marginLeft: -20,
-                  }}
-                >
+                <div className="typo-header">
                   <Typography.Title>
                     <Headers />
                   </Typography.Title>
@@ -129,16 +108,9 @@ function Mainpage() {
               </Header>
             </Layout>
             <Content
+              className="main-content2"
               style={{
-                margin: "5px 10px 5px 5px",
-                padding: 24,
-                minHeight: 280,
                 background: colorBgContainer,
-                height: "85vh",
-                width: "84vw",
-                borderRadius: 10,
-                overflowY: "auto",
-                boxShadow: "1px 1px 10px rgba(0,0,0,0.5) ",
               }}
             >
               <Contents />
@@ -148,16 +120,16 @@ function Mainpage() {
       </Layout>
     </div>
   );
-}
+};
 
-export default Mainpage;
+export default Patient;
 
 const Headers = () => {
   return (
     <div>
       <Routes>
         <Route
-          path="/Dashboard"
+          path="/patient/Dashboard"
           element={
             <h2 style={{ color: "green", fontFamily: "monospace" }}>
               Dashboard
@@ -165,7 +137,7 @@ const Headers = () => {
           }
         ></Route>
         <Route
-          path="/Assessments"
+          path="/patient/Assessments"
           element={
             <h2 style={{ color: "green", fontFamily: "monospace" }}>
               Assessments
@@ -173,7 +145,7 @@ const Headers = () => {
           }
         ></Route>
         <Route
-          path="/Health_Info"
+          path="/patient/Health_Info"
           element={
             <h2 style={{ color: "green", fontFamily: "monospace" }}>
               Health Info
@@ -181,7 +153,7 @@ const Headers = () => {
           }
         ></Route>
         <Route
-          path="/Appointments"
+          path="/patient/Appointments"
           element={
             <h2 style={{ color: "green", fontFamily: "monospace" }}>
               Appointments
@@ -189,7 +161,7 @@ const Headers = () => {
           }
         ></Route>
         <Route
-          path="/SubcPlans"
+          path="/patient/SubcPlans"
           element={
             <h2 style={{ color: "green", fontFamily: "monospace" }}>
               Subscription Plans
@@ -197,28 +169,13 @@ const Headers = () => {
           }
         ></Route>
         <Route
-          path="/Settings"
+          path="/patient/Settings"
           element={
             <h2 style={{ color: "green", fontFamily: "monospace" }}>
               Settings
             </h2>
           }
         ></Route>
-      </Routes>
-    </div>
-  );
-};
-
-const Contents = () => {
-  return (
-    <div>
-      <Routes>
-        <Route path="/Dashboard" element={<h2>Dashboard</h2>}></Route>
-        <Route path="/Assessments" element={<h2>Assessments</h2>}></Route>
-        <Route path="/Health_Info" element={<h2>Info</h2>}></Route>
-        <Route path="/Appointments" element={<AppinntmentCards />}></Route>
-        <Route path="/SubcPlans" element={<h2>Subscription Plans</h2>}></Route>
-        <Route path="/Settings" element={<h2>Settings</h2>}></Route>
       </Routes>
     </div>
   );
