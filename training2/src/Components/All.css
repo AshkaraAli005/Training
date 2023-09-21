@@ -59,10 +59,12 @@
   background-color: white;
   padding-bottom: 10px;
   width: auto;
+  position: sticky;
   display: flex;
   align-items: center;
   border-bottom: 2px solid rgb(234, 236, 240);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+
 }
 
 .typo-header {
@@ -111,14 +113,10 @@
   margin-left: 10px;
   margin-bottom: px;
 }
-.ant-layout-sider-trigger:hover {
-  background: #88da68;
-  color: #000000;
-  color: rgb(88, 88, 88); /* Change the hover color if needed */
-}
 
-.ant-layout-sider-trigger {
-  background-color: #88da68;
+.ant-layout .ant-layout-sider-trigger {
+  background-color: rgba(47, 193, 21, 0.1);
+  color: #000000;
 }
 
 .menu {
@@ -129,9 +127,15 @@
   font-weight: bold;
 }
 
-.head_text {
-  color: #d80000;
-  font-weight: lighter;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+.ant-typography h2 {
+  color: rgb(43, 137, 11);
+  font-weight: bold;
+}
+
+.ant-menu-light
+  .ant-menu-item-selected
+  {
+  color: #257a04;
+  border-bottom: 2px solid green;
+  background-color: rgba(47, 193, 21, 0.1);
 }
