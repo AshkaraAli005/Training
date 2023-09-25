@@ -8,6 +8,7 @@
   background-color: #fff;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
   border-radius: 7;
+  height: 10vh;
 }
 .header-div1 {
   display: flex;
@@ -64,7 +65,6 @@
   align-items: center;
   border-bottom: 2px solid rgb(234, 236, 240);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-
 }
 
 .typo-header {
@@ -120,22 +120,38 @@
 }
 
 .menu {
-  border-radius: 20px;
-  font-size: small;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: rgb(88, 88, 88);
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .ant-typography h2 {
-  color: rgb(43, 137, 11);
-  font-weight: bold;
+  color: rgb(40 123 31);
 }
 
-.ant-menu-light
-  .ant-menu-item-selected
-  {
+.ant-menu-light .ant-menu-item-selected {
+  border-radius: 0px;
   color: #257a04;
   border-bottom: 2px solid green;
   background-color: rgba(47, 193, 21, 0.1);
 }
+.ant-menu-item:hover{
+  background-color: rgba(47, 193, 21, 0.1);
+}
+
+/* .cardContainer{
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-template-areas: ".dateTime .dataDetails .summaryBtns";
+
+}
+.dateTime{
+  background-color: #88da68;
+}
+.dataDetails{
+  background-color: aquamarine;
+}
+.summaryBtns{
+  background-color: rgb(30, 43, 43);
+} */

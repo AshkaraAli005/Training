@@ -5,21 +5,21 @@ const Contents = () => {
     return (
       <div>
         <Routes>
-          <Route path="/patient/Dashboard" element={<h2>Dashboard</h2>}></Route>
+          <Route path="/Dashboard" element={<h2>Dashboard</h2>}></Route>
           <Route
-            path="/patient/Assessments"
+            path="/Assessments"
             element={<h2>Assessments</h2>}
           ></Route>
-          <Route path="/patient/Health_Info" element={<h2>Info</h2>}></Route>
+          <Route path="/Health_Info" element={<h2>Info</h2>}></Route>
           <Route
-            path="/patient/Appointments"
+            path="/Appointments"
             element={<AppinntmentCards />}
           ></Route>
           <Route
-            path="/patient/SubcPlans"
+            path="/SubcPlans"
             element={<h2>Subscription Plans</h2>}
           ></Route>
-          <Route path="/patient/Settings" element={<h2>Settings</h2>}></Route>
+          <Route path="/Settings" element={<h2>Settings</h2>}></Route>
         </Routes>
       </div>
     );

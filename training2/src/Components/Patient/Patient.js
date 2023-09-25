@@ -1,20 +1,18 @@
 import React, { useState } from "react";
-import Contents from "./Pcontents";
-import { Layout, Menu, Typography, theme, Image } from "antd";
+import Contents from "./patientContents";
+import { Layout, Menu, Typography, theme, Image ,Popconfirm} from "antd";
 import { Content, Header } from "antd/es/layout/layout";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Sider from "antd/es/layout/Sider";
 import {
   CalendarOutlined,
   CrownOutlined,
-  DashboardOutlined,
   FileTextOutlined,
   InfoCircleOutlined,
   LogoutOutlined,
   SettingOutlined,
-  RightOutlined,
-  LeftOutlined,
   HomeOutlined,
+  ProfileOutlined,
 } from "@ant-design/icons";
 
 const Patient = () => {
@@ -24,6 +22,66 @@ const Patient = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    nav("/");
+  };
+
+  const menuItems = [
+    {
+      label: "Dashboard",
+      key: "Dashboard",
+      icon: <HomeOutlined style={{ fontSize: 20 }} />,
+    },
+    {
+      label: "Assessments",
+      key: "Assessments",
+      icon: <FileTextOutlined style={{ fontSize: 20 }} />,
+    },
+    {
+      label: "Health Info",
+      key: "Health_Info",
+      icon: <InfoCircleOutlined style={{ fontSize: 20 }} />,
+    },
+    {
+      label: "Appoinments",
+      key: "Appointments",
+      icon: <CalendarOutlined style={{ fontSize: 20 }} />,
+    },
+    {
+      label: "Subscribtion Plans",
+      key: "SubcPlans",
+      icon: <CrownOutlined style={{ fontSize: 20 }} />,
+    },
+    {
+      key: "SettingsSubMenu",
+      icon: <SettingOutlined style={{ fontSize: 20 }} />,
+      label: "Settings",
+      children: [
+        {
+          key: "Profile",
+          icon: <ProfileOutlined style={{ fontSize: 15 }} />,
+          label: "Profile",
+        },
+        {
+          key: "Logout",
+          label: (
+            <Popconfirm
+              title="Are you sure you want to logout?"
+              onConfirm={handleLogout}
+              okText="Yes"
+              cancelText="No"
+            >
+              <span>
+                <LogoutOutlined style={{ fontSize: 15 }} /> Logout
+              </span>
+            </Popconfirm>
+          ),
+        },
+      ],
+    },
+  ];
 
   return (
     <div style={{ display: "flex", flexDirection: "colunm" }}>
@@ -56,40 +114,32 @@ const Patient = () => {
                 nav(key);
               }
             }}
-            items={[
-              {
-                label: "Dashboard",
-                key: "patient/Dashboard",
-                icon: <HomeOutlined style={{ fontSize: 20 }} />,
-              },
-              {
-                label: "Assessments",
-                key: "patient/Assessments",
-                icon: <FileTextOutlined style={{ fontSize: 20 }} />,
-              },
-              {
-                label: "Health Info",
-                key: "patient/Health_Info",
-                icon: <InfoCircleOutlined style={{ fontSize: 20 }} />,
-              },
-              {
-                label: "Appoinments",
-                key: "patient/Appointments",
-                icon: <CalendarOutlined style={{ fontSize: 20 }} />,
-              },
-              {
-                label: "Subscribtion Plans",
-                key: "patient/SubcPlans",
-                icon: <CrownOutlined style={{ fontSize: 20 }} />,
-              },
-              {
-                label: "Settings",
-                key: "patient/Settings",
-                icon: <SettingOutlined style={{ fontSize: 20 }} />,
-              },
-              { label: "Logout", key: "Logout", icon: <LogoutOutlined /> },
-            ]}
-          ></Menu>
+          >
+            {" "}
+            {menuItems.map((item) => {
+              if (item.children) {
+                return (
+                  <Menu.SubMenu
+                    key={item.key}
+                    icon={item.icon}
+                    title={item.label}
+                  >
+                    {item.children.map((child) => (
+                      <Menu.Item key={child.key} icon={child.icon}>
+                        {child.label}
+                      </Menu.Item>
+                    ))}
+                  </Menu.SubMenu>
+                );
+              } else {
+                return (
+                  <Menu.Item key={item.key} icon={item.icon}>
+                    {item.label}
+                  </Menu.Item>
+                );
+              }
+            })}
+          </Menu>
         </Sider>
         <Content>
           <div style={{ display: "flex", flexDirection: "column" }}>
@@ -129,52 +179,28 @@ const Headers = () => {
     <div>
       <Routes>
         <Route
-          path="/patient/Dashboard"
-          element={
-            <h2 style={{ color: "green", fontFamily: "monospace" }}>
-              Dashboard
-            </h2>
-          }
+          path="/Dashboard"
+          element={<h2 className="head_text">Dashboard</h2>}
         ></Route>
         <Route
-          path="/patient/Assessments"
-          element={
-            <h2 style={{ color: "green", fontFamily: "monospace" }}>
-              Assessments
-            </h2>
-          }
+          path="/Assessments"
+          element={<h2 className="head_text">Assessments</h2>}
         ></Route>
         <Route
-          path="/patient/Health_Info"
-          element={
-            <h2 style={{ color: "green", fontFamily: "monospace" }}>
-              Health Info
-            </h2>
-          }
+          path="/Health_Info"
+          element={<h2 className="head_text">Health Info</h2>}
         ></Route>
         <Route
-          path="/patient/Appointments"
-          element={
-            <h2 style={{ color: "green", fontFamily: "monospace" }}>
-              Appointments
-            </h2>
-          }
+          path="/Appointments"
+          element={<h2 className="head_text">Appointments</h2>}
         ></Route>
         <Route
-          path="/patient/SubcPlans"
-          element={
-            <h2 style={{ color: "green", fontFamily: "monospace" }}>
-              Subscription Plans
-            </h2>
-          }
+          path="/SubcPlans"
+          element={<h2 className="head_text">Subscription Plans</h2>}
         ></Route>
         <Route
-          path="/patient/Settings"
-          element={
-            <h2 style={{ color: "green", fontFamily: "monospace" }}>
-              Settings
-            </h2>
-          }
+          path="/Profile"
+          element={<h2 className="head_text">Profile</h2>}
         ></Route>
       </Routes>
     </div>

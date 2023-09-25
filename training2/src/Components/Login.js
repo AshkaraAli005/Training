@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import Inputfields from "./Inputfields";
-import { Button, Form, Input, Typography, Layout, theme ,message} from "antd";
+import { Button, Form, Typography, Layout, theme, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import Headers from "./Header";
 import "./All.css";
@@ -8,44 +8,33 @@ const { Content } = Layout;
 
 function Login() {
   const { Title } = Typography;
-  const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-  });
 
   const {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
   const nav = useNavigate();
 
-  const handleSubmit = () => {
-    console.log(formData);
-    let ls = localStorage.getItem(formData.email) ||'{ "email": "email not found" }'
-  ;
+  const handleSubmit = (values) => {
+    console.log(values);
+    let ls =
+      localStorage.getItem(values.email) || '{ "email": "email not found" }';
     let user = JSON.parse(ls);
 
     if (user.email == "email not found") {
       message.error("user not found");
-    } else if (user.password == formData.password) {
+    } else if (user.password == values.password) {
       localStorage.setItem("token", JSON.stringify(user.email));
       if (user.role == "doctor") {
         nav("/doctor");
-        message.success(`welcome , ${user.name}`)
+        message.success(`welcome , ${user.name}`);
       } else {
         nav("/patient");
-        message.success(`welcome , ${user.name}`)
+        message.success(`welcome , ${user.name}`);
       }
     } else {
       message.error("invalid password");
     }
-
-    // setFormData({});
   };
 
   return (
@@ -81,16 +70,8 @@ function Login() {
                 onFinish={handleSubmit}
                 autoComplete="off"
               >
-                <Inputfields
-                  name={'email'}
-                  value={formData.email}
-                  fun={handleChange}
-                />
-                <Inputfields
-                  name={'password'}
-                  value={formData.password}
-                  fun={handleChange}
-                />
+                <Inputfields name={"email"} />
+                <Inputfields name={"password"} />
 
                 <Form.Item
                   wrapperCol={{

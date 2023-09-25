@@ -1,5 +1,14 @@
 import React from "react";
-import { Button, Card, Space } from "antd";
+import {
+  Button,
+  Card,
+  Popconfirm,
+  Popover,
+  Space,
+  Modal,
+  Row,
+  Col,
+} from "antd";
 import Data from "./appodata.json";
 function AppinntmentCards({ name }) {
   const month = [
@@ -15,6 +24,15 @@ function AppinntmentCards({ name }) {
     "OCT",
     "NOV",
     "DEC",
+  ];
+  const summary_btns = [
+    { value: "Health info", sub: ["01", "02", "03"] },
+    { value: "Assessments", sub: ["04", "05", "06"] },
+    { value: "Case Notes", sub: ["07", "08", "09"] },
+    { value: "Preascription", sub: ["10", "11", "12"] },
+    { value: "General Assessments", sub: ["13", "14", "15"] },
+    { value: "Stress Management", sub: ["16", "17", "18"] },
+    { value: "Feedback", sub: ["19", "20", "21"] },
   ];
 
   return (
@@ -36,13 +54,15 @@ function AppinntmentCards({ name }) {
           }}
         >
           <div
+            className="cardContainer"
             style={{
               display: "flex",
               flexDirection: "row",
-              justifyContent: "center",
+              justifyContent: "space-around",
             }}
           >
             <div
+              className="dateTime"
               style={{
                 margin: "10px 10px 10px 10px",
                 display: "flex",
@@ -64,6 +84,8 @@ function AppinntmentCards({ name }) {
             </div>
             <br />
             <div
+              className="dataDetails"
+              // span={8}
               style={{
                 marginLeft: 10,
                 display: "flex",
@@ -86,40 +108,30 @@ function AppinntmentCards({ name }) {
             </div>
             <br />
             <div
+              className="summaryBtns"
+
               style={{
                 display: "flex",
                 flexFlow: "row wrap ",
-                justifyContent: "space-around",
+                gap:"5px",
                 alignItems: "center",
               }}
             >
-              <Button type="dashed" className="card-info-btn">
-                Health info
-              </Button>
-              <Button type="dashed" className="card-info-btn">
-                Assessment
-              </Button>
-              <Button type="dashed" className="card-info-btn">
-                Case Notes
-              </Button>
-              <Button type="dashed" className="card-info-btn">
-                Preascription
-              </Button>
-              <Button type="dashed" className="card-info-btn">
-                General Assessment
-              </Button>
-              <Button type="dashed" className="card-info-btn">
-                Stress Management
-              </Button>
-              <Button type="dashed" className="card-info-btn">
-                Stress Management
-              </Button>
-              <Button type="dashed" className="card-info-btn">
-                Stress Management
-              </Button>
-              <Button type="dashed" className="card-info-btn">
-                Stress Management
-              </Button>
+              {summary_btns.map((items) => (
+                <Popover
+                  content={
+                    <Space>
+                      {items.sub.map((subitem) => (
+                        <Button size="small">{subitem}</Button>
+                      ))}
+                    </Space>
+                  }
+                >
+                  <Button type="dashed" className="card-info-btn">
+                    {items.value}
+                  </Button>
+                </Popover>
+              ))}
             </div>
           </div>
         </Card>

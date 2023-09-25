@@ -22,7 +22,7 @@ const Register = () => {
     token: { colorBgContainer },
   } = theme.useToken();
 
-  const onFinish = () => {
+  const onFinish = (values) => {
     let regname = /^[a-zA-Z\-]+$/;
 
     let regemail =
@@ -31,13 +31,13 @@ const Register = () => {
     let regpassword =
       /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/;
 
-    if (regname.test(formdata.name) == false) {
+    if (regname.test(values.name) == false) {
       message.warning("please enter valid name");
-    } else if (localStorage.getItem(formdata.email)) {
+    } else if (localStorage.getItem(values.email)) {
       message.warning("email already exists");
-    } else if (regemail.test(formdata.email) == false) {
+    } else if (regemail.test(values.email) == false) {
       message.warning("Invalid Email Address");
-    } else if (regpassword.test(formdata.password) == false) {
+    } else if (regpassword.test(values.password) == false) {
       message.warning(
         <>
           <p>
@@ -55,28 +55,22 @@ const Register = () => {
         </>
       );
     } else {
-      localStorage.setItem(formdata.email, JSON.stringify(formdata));
+      localStorage.setItem(values.email, JSON.stringify(values));
 
       let all = JSON.parse(localStorage.getItem("alluser")) || [];
 
       localStorage.setItem(
         "alluser",
 
-        JSON.stringify([...all, formdata.email])
+        JSON.stringify([...all, values.email])
       );
 
-      console.log(formdata);
-
-      setFormdata({});
+      console.log(values);
 
       nav("/");
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormdata({ ...formdata, [name]: value });
-  };
 
   return (
     <div style={{ margin: "auto" }}>
@@ -109,27 +103,24 @@ const Register = () => {
               >
                 <Inputfields
                   name={"name"}
-                  value={formdata.name}
-                  fun={handleChange}
+
                 />
                 <Inputfields
                   name={"email"}
-                  value={formdata.email}
-                  fun={handleChange}
+
                 />
 
                 <Inputfields
                   name={"password"}
-                  value={formdata.Password}
-                  fun={handleChange}
                 />
                 <Form.Item
                   wrapperCol={{
                     offset: 5,
                     span: 16,
                   }}
+                  name="role"
                 >
-                  <Radio.Group onChange={onRadio} value={formdata.role}>
+                  <Radio.Group >
                     <Radio value={"doctor"}>Doctor</Radio>
                     <Radio value={"patient"}>Patient</Radio>
                   </Radio.Group>
