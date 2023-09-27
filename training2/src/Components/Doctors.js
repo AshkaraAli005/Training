@@ -12,6 +12,7 @@ import {
 import { Content, Header } from "antd/es/layout/layout";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Sider from "antd/es/layout/Sider";
+import DashboardContents from "./dashboardContents";
 
 import {
   CalendarOutlined,
@@ -45,6 +46,10 @@ function Doctor() {
       oncancel() {},
     });
   };
+
+  const onClickHandler = (id) =>{
+    console.log(id)
+   }
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -222,10 +227,11 @@ const Headers = () => {
 };
 
 const Contents = () => {
-  return (
+
+  return ( 
     <div>
       <Routes>
-        <Route path="/" element={<h2>This is Dashboard</h2>}></Route>
+        <Route path="/" element={<DashboardContents/>}></Route>
         <Route path="/Appointments" element={<AppinntmentCards />}></Route>
         <Route
           path="/Availability"

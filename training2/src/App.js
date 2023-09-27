@@ -1,3 +1,4 @@
+
 import Login from "./Components/Login";
 import Register from "./Components/Signup";
 import PrivateRoute from "./Components/privateroute";
@@ -20,3 +21,4 @@ const App = () => {
   );
 };
 export default App;
+

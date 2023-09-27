@@ -68,7 +68,6 @@ function AppinntmentCards({ name }) {
                 display: "flex",
                 marginRight: "30px",
                 flexDirection: "column",
-                justifyContent: "center",
                 alignItems: "center",
               }}
             >

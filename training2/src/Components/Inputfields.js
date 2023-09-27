@@ -1,12 +1,12 @@
 import React from "react";
 import { Form, Input } from "antd";
 
-const Inputfields = ({ name, data }) => {
+const Inputfields = ({ name, data  , rules}) => {
   return (
     <Form.Item
       name={name}
       value={data}
-      rules={[{ required: true, message: `Please enter the ${name}` }]}
+      rules={rules}
     >
       {name == "password" ? (
         <Input.Password className="input-field" placeholder={name} />
@@ -16,5 +16,12 @@ const Inputfields = ({ name, data }) => {
     </Form.Item>
   );
 };
+Inputfields.defaultProps = {
+  data: "",
+  name:"",
+};
 
 export default Inputfields;
+
+
+

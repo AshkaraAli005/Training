@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import Inputfields from "./Inputfields";
 import { Button, Form, Typography, Layout, theme, message } from "antd";
 import { useNavigate } from "react-router-dom";
 import Headers from "./Header";
+import axios from "axios";
 import "./All.css";
 const { Content } = Layout;
 
 function Login() {
   const { Title } = Typography;
+  const [postData, setPostData] = useState([]);
+
+  const dataPush = () => {
+    axios
+      .post("http://192.168.26.185:5000/user/register", {
+        username: "Ashkar Ali ",
+        email: "aliashkar@gmail.com",
+        password: "1234@aAAa",
+      })
+      .then((res) => console.log(res)).catch((err) => console.log(err));
+  };
+
+  const apiTest = () => {
+    axios
+      .get("https://course-api.com/react-useReducer-cart-project")
+      .then((response) => {
+        const datas = [];
+        for (let key in response.data) {
+          datas.push({ ...response.data[key], id: key });
+        }
+        setPostData(datas);
+        message.success("Api fetched");
+        console.log(datas);
+      })
+      .catch((err) => {
+        message.success(err.message);
+        console.log(err);
+      });
+  };
 
   const {
     token: { colorBgContainer },
@@ -26,6 +56,8 @@ function Login() {
     } else if (user.password == values.password) {
       localStorage.setItem("token", JSON.stringify(user.email));
       if (user.role == "doctor") {
+        dataPush();
+
         nav("/doctor");
         message.success(`welcome , ${user.name}`);
       } else {
@@ -70,8 +102,18 @@ function Login() {
                 onFinish={handleSubmit}
                 autoComplete="off"
               >
-                <Inputfields name={"email"} />
-                <Inputfields name={"password"} />
+                <Inputfields
+                  name={"email"}
+                  rules={[
+                    { required: true, message: `Please enter the mail id` },
+                  ]}
+                />
+                <Inputfields
+                  name={"password"}
+                  rules={[
+                    { required: true, message: `Please enter the password` },
+                  ]}
+                />
 
                 <Form.Item
                   wrapperCol={{

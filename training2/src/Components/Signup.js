@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Headers from "./Header";
 import Inputfields from "./Inputfields";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Typography, Layout, theme, Radio, message } from "antd";
 
@@ -16,6 +17,15 @@ const Register = () => {
     console.log("radio checked", e.target.value);
     setValue(e.target.value);
     setFormdata({ ...formdata, role: e.target.value });
+  };
+  const dataPush = (values) => {
+    axios
+      .post("http://192.168.26.185:5000/user/register", {
+        username: values.name,
+        email: values.email,
+        password: values.password,
+      })
+      .then((res) => console.log(res)).catch((err) => console.log(err));
   };
 
   const {
@@ -64,6 +74,7 @@ const Register = () => {
 
         JSON.stringify([...all, values.email])
       );
+      dataPush(values);
 
       console.log(values);
 
