@@ -34,5 +34,14 @@
       "appointment_date_time": "2023-8-20 10:00:00",
       "is_confirmed": false,
       "mode_of_communication": "Video Call"
+    },
+    {
+      "appointment_id": 2174,
+      "doctor_name": "Rajkumar",
+      "salutation": "Kabali",
+      "appointment_status": "Missed",
+      "appointment_date_time": "2023-11-20 10:00:00",
+      "is_confirmed": false,
+      "mode_of_communication": "Video Call"
     }
   ]

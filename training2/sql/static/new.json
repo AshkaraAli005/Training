@@ -1,0 +1,349 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "API Documentation",
+        "version": "1.0.0",
+        "title": "Product_user.ai"
+      },
+    "components":{
+        "schemas":{
+            "userlogin":{
+                "type":"object",
+                "example":{
+                    "username":"username",
+                    "password":"password"
+                }
+            },
+            "userRegister":{
+                "type":"object",
+                "example":{
+                    "username":"username",
+                    "email":"email@email.com",
+                    "password":"password"
+                }
+            },
+            "productadd":{
+                "type":"object",
+                "example":{
+                    "name":"name",
+                    "price":20,
+                    "qty":200,
+                    "description":"This is description"
+                }
+            }
+        },
+        "securitySchemes": {
+            "basicAuth": {
+              "type": "http",
+              "scheme": "basic"
+            },
+            "bearerAuth": {
+              "type": "http",
+              "scheme": "bearer",
+              "bearerFormat": "JWT"
+            }
+          }
+    },
+    "paths":{
+        "/user/login":{
+            "post":{
+                "security":[
+                    {
+                        "basicAuth":[]
+                    }
+                ],
+                "tags":[
+                    "UserManagement"
+                ],
+                "summary": "Returns JWT Token if valid user.",
+                "requestBody":{
+                    "description":"for user login",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/userlogin"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"user logined"
+                    }
+                }
+            }
+        },
+        "/user/register":{
+            "post":{
+                "security":[
+                    {
+                        "basicAuth":[]
+                    }
+                ],
+                "tags":[
+                    "UserManagement"
+                ],
+                "summary": "Returns user data with id.",
+                "requestBody":{
+                    "description":"for user registration",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/userRegister"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"user created"
+                    }
+                }
+            }
+        },
+        "/user/refresh":{
+            "get":{
+                "security":[
+                    {
+                        "bearerAuth":[]
+                    }
+                ],
+                "tags":[
+                    "UserManagement"
+                ],
+                "summary": "Returns user id with new access token.",
+                "responses":{
+                    "200":{
+                        "description":"new access token created"
+                    }
+                }
+            }
+        },
+        "/user/me":{
+            "get":{
+                "security":[
+                    {
+                        "bearerAuth":[]
+                    }
+                ],
+                "tags":[
+                    "UserManagement"
+                ],
+                "summary": "Returns user id and email.",
+                "responses":{
+                    "200":{
+                        "description":"check user credentials"
+                    }
+                }
+            }
+        },
+        "/getall":{
+            "get":{
+                "security":[
+                    {
+                        "bearerAuth":[]
+                    }
+                ],
+                "tags":[
+                    "ProductManagement"
+                ],
+                "summary": "Returns all products uploaded by specific user, pagination meta data",
+                "parameters": [
+                    {
+                      "name": "page",
+                      "in": "query",
+                      "required": false,
+                      "description": " To see specified page",
+                      "type": "integer"
+                    },
+                    {
+                        "name": "per_page",
+                        "in": "query",
+                        "required": false,
+                        "description": " To see number of items per page",
+                        "type": "integer"
+                      }
+                  ],
+                "responses":{
+                    "200":{
+                        "description":"All products returned"
+                    }
+                }
+            }
+        },
+        "/get/{id}":{
+            "get":{
+                "security":[
+                    {
+                        "bearerAuth":[]
+                    }
+                ],
+                "tags":[
+                    "ProductManagement"
+                ],
+                "summary": "Returns all products uploaded by specific user, pagination meta data",
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "description": " To see specified product",
+                      "type": "integer"
+                    }
+                  ],
+                "responses":{
+                    "200":{
+                        "description":"specified product returned"
+                    }
+                }
+            }
+        },
+        "/add":{
+            "post":{
+                "security":[
+                    {
+                        "bearerAuth":[]
+                    }
+                ],
+                "tags":[
+                    "ProductManagement"
+                ],
+                "summary": "Add product to database.",
+                "requestBody":{
+                    "description":"for add product",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/productadd"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"product created"
+                    }
+                }
+            }
+        },
+        "/delete/{id}":{
+            "delete":{
+                "security":[
+                    {
+                        "bearerAuth":[]
+                    }
+                ],
+                "tags":[
+                    "ProductManagement"
+                ],
+                "summary": "Delete the product specified",
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "description": " To delete specified product",
+                      "type": "integer"
+                    }
+                  ],
+                "responses":{
+                    "200":{
+                        "description":"specified product returned"
+                    }
+                }
+            }
+        },
+        "/update/{id}":{
+            "put":{
+                "security":[
+                    {
+                        "bearerAuth":[]
+                    }
+                ],
+                "tags":[
+                    "ProductManagement"
+                ],
+                "summary": "update product in database.",
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "description": " To update that product",
+                      "type": "integer"
+                    }
+                  ],
+                "requestBody":{
+                    "description":"for update all details of product",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/productadd"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"product updated"
+                    }
+                }
+            },
+            "patch":{
+                "security":[
+                    {
+                        "bearerAuth":[]
+                    }
+                ],
+                "tags":[
+                    "ProductManagement"
+                ],
+                "summary": "partical update product in database.",
+                "parameters": [
+                    {
+                      "name": "id",
+                      "in": "path",
+                      "required": true,
+                      "description": " To update that product",
+                      "type": "integer"
+                    }
+                  ],
+                "requestBody":{
+                    "description":"for update partial details of product",
+                    "content":{
+                        "application/json":{
+                            "schema":{
+                                "$ref":"#/components/schemas/productadd"
+                            }
+                        }
+                    }
+                },
+                "responses":{
+                    "200":{
+                        "description":"product updated"
+                    }
+                }
+            }
+        },
+        "/cors":{
+            "get":{
+                "security":[
+                    {
+                        "basicAuth":[]
+                    }
+                ],
+                "tags":[
+                    "CORS enabled endpoints"
+                ],
+                "summary": "Returns json to cors ",
+                "responses":{
+                    "200":{
+                        "description":"Json sent with key 'data'"
+                    }
+                }
+            }
+        }
+
+    },
+    "swagger":"3.0"
+}

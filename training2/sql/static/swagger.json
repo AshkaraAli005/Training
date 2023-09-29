@@ -1,0 +1,284 @@
+{
+  "components": {
+    "schemas": {
+      "id": {
+        "properties": {
+          "uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "userlogin": {
+        "type": "object",
+        "example": {
+          "username": "admin",
+          "password": "Pass"
+        }
+      },
+      "classifyImageRequest": {
+        "type": "object",
+        "example": {
+          "name": "file"
+        }
+      },
+      "updateUserRequest": {
+        "type": "object",
+        "example": {
+          "name": "",
+          "password": "",
+          "admin": false
+        }
+      },
+      "bookRequests": {
+        "type": "object",
+        "properties": {
+          "bookRequest": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/bookRequest"
+            }
+          }
+        }
+      },
+      "bookRequest": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "format": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "number"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "basicAuth": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      },
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "x-access-token",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+  "info": {
+    "description": "API Documentation",
+    "version": "1.0.0",
+    "title": "Product_user.ai"
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/user/login": {
+      "post": {
+        "security": [
+          {
+            "basicAuth": []
+          }
+        ],
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Returns JWT Token if valid user.",
+        "requestBody": {
+          "description": "for authorization.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/models/schemas/user"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/bookRequests"
+            }
+          }
+        }
+      }
+    },
+    "/add": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "Product Management"
+        ],
+        "summary": "Create new Product.",
+        "requestBody": {
+          "description": "Create new Product.",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/createUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/bookRequests"
+            }
+          }
+        }
+      }
+    },
+    "/img_classification": {
+      "post": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Classifies the image.",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "file",
+                    "format": "base64"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/bookRequests"
+            }
+          }
+        }
+      }
+    },
+    "/user/{public_id}": {
+      "parameters": [
+        {
+          "name": "public_id",
+          "in": "path",
+          "required": true,
+          "description": " To update User",
+          "type": "string"
+        }
+      ],
+      "put": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Update the User details.",
+        "requestBody": {
+          "description": "Update the properties of an user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/bookRequests"
+            }
+          }
+        }
+      }
+    },
+    "/deleteuser/{public_id}": {
+      "parameters": [
+        {
+          "name": "public_id",
+          "in": "path",
+          "required": true,
+          "description": "User Id to delete eg: 201911PAT004",
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "User Management"
+        ],
+        "summary": "delete the User details.",
+        "requestBody": {
+          "description": "delete the properties of an user"
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/bookRequests"
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "parameters": [],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "tags": [
+          "User Management"
+        ],
+        "summary": "Returns all the available users.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/bookRequests"
+            }
+          }
+        }
+      }
+    }
+  },
+  "swagger": "3.0"
+}

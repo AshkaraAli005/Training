@@ -35,7 +35,7 @@ const DashboardContents = () => {
     <div className="App">
       
       {postData.map((post) => {
-        return <Post key={post.id} data={post} postClicked={()=>{onClickHandler(post.id)}} />;
+        return <Post key={post.id} data={post} postClicked={()=>{onClickHandler(post.title)}} />;
       })}
     </div>
   );

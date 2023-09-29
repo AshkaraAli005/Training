@@ -9,23 +9,17 @@ const { Title } = Typography;
 const { Content } = Layout;
 
 const Register = () => {
-  const [formdata, setFormdata] = useState("");
   const nav = useNavigate();
-
-  const [value, setValue] = useState(1);
-  const onRadio = (e) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
-    setFormdata({ ...formdata, role: e.target.value });
-  };
   const dataPush = (values) => {
     axios
-      .post("http://192.168.26.185:5000/user/register", {
+      .post("http://192.168.26.210:5000/register", {
         username: values.name,
         email: values.email,
         password: values.password,
+        role: values.role,
       })
-      .then((res) => console.log(res)).catch((err) => console.log(err));
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   };
 
   const {
@@ -82,7 +76,6 @@ const Register = () => {
     }
   };
 
-
   return (
     <div style={{ margin: "auto" }}>
       <Headers />
@@ -112,18 +105,10 @@ const Register = () => {
                 onFinish={onFinish}
                 autoComplete="off"
               >
-                <Inputfields
-                  name={"name"}
+                <Inputfields name={"name"} />
+                <Inputfields name={"email"} />
 
-                />
-                <Inputfields
-                  name={"email"}
-
-                />
-
-                <Inputfields
-                  name={"password"}
-                />
+                <Inputfields name={"password"} />
                 <Form.Item
                   wrapperCol={{
                     offset: 5,
@@ -131,7 +116,7 @@ const Register = () => {
                   }}
                   name="role"
                 >
-                  <Radio.Group >
+                  <Radio.Group>
                     <Radio value={"doctor"}>Doctor</Radio>
                     <Radio value={"patient"}>Patient</Radio>
                   </Radio.Group>

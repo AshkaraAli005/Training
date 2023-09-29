@@ -1,0 +1,329 @@
+{
+    "components": {
+        "schemas": {
+            "createDocumentRequest": {
+                "type": "object",
+                "example": {
+                    "document_ref_no": "",
+                    "document_data": {},
+                    "document_category": "",
+                    "receipt_supplier_name": "",
+                    "receipt_total_amount": ""
+                }
+            },
+            "loginRequest": {
+                "type": "object",
+                "example": {
+                    "username": "",
+                    "password": ""
+                }
+            },
+            "DocumentMatchRequest": {
+                "type": "object",
+                "example": {
+                    "document_category": "",
+                    "document_data": {},
+                    "document_ref_no": ""
+                }
+            },
+            "updateDocumentRequest": {
+                "type": "object",
+                "example": {
+                    "document_ref_no": "",
+                    "document_data": {},
+                    "document_category": "",
+                    "receipt_supplier_name": "",
+                    "receipt_total_amount": ""
+                }
+            },
+            "partialUpdateDocumentRequest": {
+                "type": "object",
+                "example": {}
+            }
+        },
+        "securitySchemes": {
+            "basicAuth": {
+                "type": "http",
+                "scheme": "basic"
+            },
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "info": {
+        "description": "API Documentation",
+        "version": "1.0.0",
+        "title": "Document-Match"
+    },
+    "openapi": "3.0.0",
+    "paths": {
+        "/login": {
+            "post": {
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ],
+                "tags": [
+                    "User Management"
+                ],
+                "summary": "Returns JWT Token if valid user.",
+                "requestBody": {
+                    "description": "for authorization.",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/loginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/document": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Document Management"
+                ],
+                "summary": "Create new Document.",
+                "requestBody": {
+                    "description": "Create new Document.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/createDocumentRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/document-bulk": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Document Management"
+                ],
+                "summary": "Upload bulk documents with a csv file.",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "file",
+                                        "format": "base64"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/documents": {
+            "get": {
+                "parameters": [],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Document Management"
+                ],
+                "summary": "Returns all the available Documents.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/document/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "unique id to get specific document",
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Document Management"
+                ],
+                "summary": "Returns one Document based on unique id.",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": " To update document",
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Document Management"
+                ],
+                "summary": "Update the document details .",
+                "requestBody": {
+                    "description": "Update the properties of a document",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/updateDocumentRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": " To update document",
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Document Management"
+                ],
+                "summary": "Update the document details on specific keys",
+                "requestBody": {
+                    "description": "Update the  properties of a document on specific keys",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/partialUpdateDocumentRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "unique id to delete specific document",
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Document Management"
+                ],
+                "summary": "deletes the specific Document.",
+                "requestBody": {
+                    "description": "delete the specific Document"
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/api/document_match_swagger": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Document_Match"
+                ],
+                "summary": "compares two document",
+                "requestBody": {
+                    "description": "compares two document and return True or False",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/DocumentMatchRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    }
+}

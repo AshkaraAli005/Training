@@ -6,7 +6,6 @@ import {
   Typography,
   theme,
   Image,
-  Popconfirm,
   Modal,
 } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
@@ -47,9 +46,9 @@ function Doctor() {
     });
   };
 
-  const onClickHandler = (id) =>{
-    console.log(id)
-   }
+  const onClickHandler = (id) => {
+    console.log(id);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -227,11 +226,10 @@ const Headers = () => {
 };
 
 const Contents = () => {
-
-  return ( 
+  return (
     <div>
       <Routes>
-        <Route path="/" element={<DashboardContents/>}></Route>
+        <Route path="/" element={<DashboardContents />}></Route>
         <Route path="/Appointments" element={<AppinntmentCards />}></Route>
         <Route
           path="/Availability"

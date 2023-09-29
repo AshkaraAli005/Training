@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Contents from "./patientContents";
-import { Layout, Menu, Typography, theme, Image ,Popconfirm} from "antd";
+import { Layout, Menu, Typography, theme, Image, Popconfirm } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Sider from "antd/es/layout/Sider";

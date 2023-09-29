@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Inputfields from "./Inputfields";
 import { Button, Form, Typography, Layout, theme, message } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, redirect } from "react-router-dom";
 import Headers from "./Header";
 import axios from "axios";
 import "./All.css";
@@ -9,35 +9,18 @@ const { Content } = Layout;
 
 function Login() {
   const { Title } = Typography;
-  const [postData, setPostData] = useState([]);
 
-  const dataPush = () => {
-    axios
-      .post("http://192.168.26.185:5000/user/register", {
-        username: "Ashkar Ali ",
-        email: "aliashkar@gmail.com",
-        password: "1234@aAAa",
-      })
-      .then((res) => console.log(res)).catch((err) => console.log(err));
-  };
+  const instance = axios.create({
+    baseURL: "http://192.168.26.185:5000",
+  });
 
-  const apiTest = () => {
-    axios
-      .get("https://course-api.com/react-useReducer-cart-project")
-      .then((response) => {
-        const datas = [];
-        for (let key in response.data) {
-          datas.push({ ...response.data[key], id: key });
-        }
-        setPostData(datas);
-        message.success("Api fetched");
-        console.log(datas);
-      })
-      .catch((err) => {
-        message.success(err.message);
-        console.log(err);
-      });
-  };
+  instance.interceptors.request.use((config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
 
   const {
     token: { colorBgContainer },
@@ -45,27 +28,26 @@ function Login() {
 
   const nav = useNavigate();
 
-  const handleSubmit = (values) => {
-    console.log(values);
-    let ls =
-      localStorage.getItem(values.email) || '{ "email": "email not found" }';
-    let user = JSON.parse(ls);
-
-    if (user.email == "email not found") {
-      message.error("user not found");
-    } else if (user.password == values.password) {
-      localStorage.setItem("token", JSON.stringify(user.email));
-      if (user.role == "doctor") {
-        dataPush();
-
-        nav("/doctor");
-        message.success(`welcome , ${user.name}`);
-      } else {
-        nav("/patient");
-        message.success(`welcome , ${user.name}`);
+  const login = async (values) => {
+    try {
+      const response = await axios.post("http://192.168.26.210:5000/login", {
+        email: values.email,
+        password: values.password,
+      });
+      console.log(values);
+      localStorage.setItem("token", JSON.stringify(response.data));
+      if (!response.data.user) {
+        message.error(response.data.message);
       }
-    } else {
-      message.error("invalid password");
+      if (response.data.user.role === "doctor") {
+        nav("/doctor");
+        message.success(`welcome , ${response.data.user.username}`);
+      } else if (response.data.user.role === "patient") {
+        nav("/patient");
+        message.success(`welcome , ${response.data.user.username}`);
+      }
+    } catch (err) {
+      console.error(err);
     }
   };
 
@@ -99,7 +81,7 @@ function Login() {
                 initialValues={{
                   remember: true,
                 }}
-                onFinish={handleSubmit}
+                onFinish={login}
                 autoComplete="off"
               >
                 <Inputfields
