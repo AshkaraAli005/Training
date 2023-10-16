@@ -12,7 +12,7 @@ const Register = () => {
   const nav = useNavigate();
   const dataPush = (values) => {
     axios
-      .post("http://192.168.26.210:5000/register", {
+      .post("http://127.0.0.1:5000/register", {
         username: values.name,
         email: values.email,
         password: values.password,

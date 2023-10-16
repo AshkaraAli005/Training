@@ -108,11 +108,10 @@ function AppinntmentCards({ name }) {
             <br />
             <div
               className="summaryBtns"
-
               style={{
                 display: "flex",
                 flexFlow: "row wrap ",
-                gap:"5px",
+                gap: "5px",
                 alignItems: "center",
               }}
             >

@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 import AppinntmentCards from "./AppinntmentCards";
-import {
-  Layout,
-  Menu,
-  Typography,
-  theme,
-  Image,
-  Modal,
-} from "antd";
+import { Layout, Menu, Typography, theme, Image, Modal } from "antd";
 import { Content, Header } from "antd/es/layout/layout";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Sider from "antd/es/layout/Sider";
@@ -89,12 +82,6 @@ function Doctor() {
         {
           key: "Logout",
           label: (
-            // <Popconfirm
-            //   title="Are you sure you want to logout?"
-            //   onConfirm={handleLogout}
-            //   okText="Yes"
-            //   cancelText="No"
-            // >
             <span onClick={showConfrm}>
               <LogoutOutlined style={{ fontSize: 15 }} /> Logout
             </span>

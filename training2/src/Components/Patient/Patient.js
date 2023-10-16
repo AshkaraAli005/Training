@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import Contents from "./patientContents";
-import { Layout, Menu, Typography, theme, Image, Popconfirm } from "antd";
+import {
+  Layout,
+  Menu,
+  Typography,
+  theme,
+  Image,
+  Popconfirm,
+  Modal,
+} from "antd";
 import { Content, Header } from "antd/es/layout/layout";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Sider from "antd/es/layout/Sider";
@@ -13,6 +21,7 @@ import {
   SettingOutlined,
   HomeOutlined,
   ProfileOutlined,
+  InfoCircleFilled,
 } from "@ant-design/icons";
 
 const Patient = () => {
@@ -22,6 +31,20 @@ const Patient = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+
+  const { confirm } = Modal;
+  const showConfrm = () => {
+    confirm({
+      title: "Are you sure you want to logout?",
+      okText: "Logout",
+      okType: "danger",
+      icon: <InfoCircleFilled style={{ color: "#02b2ff" }} />,
+      onOk() {
+        handleLogout();
+      },
+      oncancel() {},
+    });
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -67,16 +90,9 @@ const Patient = () => {
         {
           key: "Logout",
           label: (
-            <Popconfirm
-              title="Are you sure you want to logout?"
-              onConfirm={handleLogout}
-              okText="Yes"
-              cancelText="No"
-            >
-              <span>
-                <LogoutOutlined style={{ fontSize: 15 }} /> Logout
-              </span>
-            </Popconfirm>
+            <span onClick={showConfrm}>
+              <LogoutOutlined style={{ fontSize: 15 }} /> Logout
+            </span>
           ),
         },
       ],
@@ -107,12 +123,7 @@ const Patient = () => {
             mode="inline"
             defaultSelectedKeys={[selectedkey]}
             onClick={({ key }) => {
-              if (key === "Logout") {
-                localStorage.removeItem("token");
-                nav("/");
-              } else {
-                nav(key);
-              }
+              nav(key);
             }}
           >
             {" "}
