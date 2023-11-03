@@ -1,6 +1,6 @@
 import React from "react";
-import Posts from "../reduxFeatures/posts/PostsList";
-import PostForm from "../reduxFeatures/posts/AddPostForm";
+import Posts from "./reduxFeatures/posts/PostsList";
+import PostForm from "./reduxFeatures/posts/AddPostForm";
 
 const ReduxLearning = () => {
   return (

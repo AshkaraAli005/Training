@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -8,9 +7,9 @@ const MessageForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://127.0.0.1:5000/post/messages", { msg:content })
+      .post("http://127.0.0.1:5050/post/messages", { msg: content })
       .then(() => {
-        console.log("done")// Optionally, you can display a success message or update the message list.
+        console.log("done"); // Optionally, you can display a success message or update the message list.
       })
       .catch((error) => {
         console.error("Error posting message:", error);
@@ -26,7 +25,6 @@ const MessageForm = () => {
         onChange={(e) => setContent(e.target.value)}
       />
       <button type="submit">Post</button>
-      
     </form>
   );
 };

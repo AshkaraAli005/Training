@@ -1,5 +1,5 @@
 import React from "react";
-import SpeechToText from "../Speech";
+import SpeechToText from "../Authentication/Speech";
 import TextArea from "../FormFields/TextareaInput";
 import InpText from "../FormFields/FormInputComonent";
 import { Button, Form } from "antd";

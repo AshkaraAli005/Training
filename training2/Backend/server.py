@@ -1,6 +1,6 @@
 from flask import Flask,request
 from flask_cors import cross_origin, CORS
-
+from models import USER
 
 
 app = Flask(__name__)
@@ -21,9 +21,7 @@ print(message)
 def post_message():
     global message
     message = request.json['msg']
-   
-    
-    return 'send'
+
 
 @app.route("/get/messages")
 def get_messgae():

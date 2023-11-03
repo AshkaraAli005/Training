@@ -1,23 +1,16 @@
-import Login from "./Components/Login";
-import Register from "./Components/Signup";
-import PrivateRoute from "./Components/privateroute";
+import Login from "./Components/Authentication/Login";
+import Register from "./Components/Authentication/Signup";
+import PrivateRoute from "./Components/Authentication/privateroute";
 import { Routes, Route } from "react-router-dom";
 import Patient from "./Components/Patient/Patient";
-import Doctor from "./Components/Doctors";
+import Doctor from "./Components/Doctor/Doctors";
 import { App } from "antd";
-
-import SpeechRecognitionComponent from "./Components/NewSpeechrecognition";
-
 import "./App.css";
-import MessageForm from "./Components/webHooks/MessageForm";
-import MessageList from "./Components/webHooks/MessageList";
 
 const Apps = () => {
   return (
     <div className="App">
-      {/* <ReduxLearning /> */}
-      {/* <Home/> */}
-      {/* <Routes>
+      <Routes>
         <Route
           path="/"
           element={
@@ -31,11 +24,7 @@ const Apps = () => {
           <Route path="doctor/*" element={<Doctor />}></Route>
           <Route path="patient/*" element={<Patient />}></Route>
         </Route>
-      </Routes> */}
-      {/* <Speechrecognition/> */}
-      {/* <SpeechRecognitionComponent/> */}
-      <MessageForm />
-      <MessageList />
+      </Routes>
     </div>
   );
 };

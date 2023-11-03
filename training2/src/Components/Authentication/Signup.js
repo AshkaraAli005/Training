@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Headers from "./Header";
-import Inputfields from "./Inputfields";
+import Headers from "../Header";
+import Inputfields from "../Inputfields";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Form, Button, Typography, Layout, theme, Radio, message } from "antd";

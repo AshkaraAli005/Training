@@ -1,0 +1,74 @@
+[
+  {
+    "notificationId": 1,
+    "status": true,
+    "message": "Pdf completed T",
+    "dateTime": "2023-11-02 10:25:00",
+    "path": "pdf",
+    "isRead": true
+  },
+  {
+    "notificationId": 2,
+    "status": true,
+    "message": "Pdf completed",
+    "dateTime": "2023-11-02 10:25:00",
+    "path": "pdf",
+    "isRead": false
+  },
+  {
+    "notificationId": 3,
+    "status": true,
+    "message": "Pdf completed",
+    "dateTime": "2023-11-02 10:25:00",
+    "path": "pdf",
+    "isRead": false
+  },
+  {
+    "notificationId": 3,
+    "status": true,
+    "message": "Pdf completed",
+    "dateTime": "2023-11-02 10:25:00",
+    "path": "pdf",
+    "isRead": true
+  },
+  {
+    "notificationId": 3,
+    "status": true,
+    "message": "Pdf completed",
+    "dateTime": "2023-11-02 10:25:00",
+    "path": "pdf",
+    "isRead": true
+  },
+  {
+    "notificationId": 3,
+    "status": true,
+    "message": "Pdf completed",
+    "dateTime": "2023-11-02 10:25:00",
+    "path": "pdf",
+    "isRead": true
+  },
+  {
+    "notificationId": 3,
+    "status": true,
+    "message": "Pdf completed",
+    "dateTime": "2023-11-02 10:25:00",
+    "path": "pdf",
+    "isRead": false
+  },
+  {
+    "notificationId": 3,
+    "status": true,
+    "message": "Pdf completed",
+    "dateTime": "2023-11-02 10:25:00",
+    "path": "pdf",
+    "isRead": true
+  },
+  {
+    "notificationId": 4,
+    "status": true,
+    "message": "Pdf completed",
+    "dateTime": "2023-11-02 10:25:00",
+    "path": "pdf",
+    "isRead": true
+  }
+]

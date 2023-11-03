@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import AppinntmentCards from "./AppinntmentCards";
+import AppinntmentCards from "../AppinntmentCards";
 import { Layout, Menu, Typography, theme, Image, Modal } from "antd";
-import { Content, Header } from "antd/es/layout/layout";
+import { Content, Footer, Header } from "antd/es/layout/layout";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Sider from "antd/es/layout/Sider";
-import DashboardContents from "./dashboardContents";
+import DashboardContents from "../dashboardContents";
 
 import {
   CalendarOutlined,
@@ -16,6 +16,9 @@ import {
   SettingOutlined,
   TeamOutlined,
 } from "@ant-design/icons";
+import Dashboard from "../patientDashboard/Dashboard";
+import NewNotification from "../../notification/NewNotification";
+
 
 function Doctor() {
   const [selectedkey, setSelectedKey] = useState("/doctor/Appointments");
@@ -174,6 +177,9 @@ function Doctor() {
             >
               <Contents />
             </Content>
+            <Footer>
+              <NewNotification />
+            </Footer>
           </div>
         </Content>
       </Layout>
@@ -216,7 +222,7 @@ const Contents = () => {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<DashboardContents />}></Route>
+        <Route path="/" element={<Dashboard />}></Route>
         <Route path="/Appointments" element={<AppinntmentCards />}></Route>
         <Route
           path="/Availability"

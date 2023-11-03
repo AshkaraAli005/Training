@@ -9,7 +9,7 @@ import {
   Popconfirm,
   Modal,
 } from "antd";
-import { Content, Header } from "antd/es/layout/layout";
+import { Content, Header, Footer } from "antd/es/layout/layout";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Sider from "antd/es/layout/Sider";
 import {
@@ -23,6 +23,8 @@ import {
   ProfileOutlined,
   InfoCircleFilled,
 } from "@ant-design/icons";
+import NewNotification from "../../notification/NewNotification";
+
 
 const Patient = () => {
   const [selectedkey, setket] = useState("/Mainpage/Appointments");
@@ -177,6 +179,9 @@ const Patient = () => {
               <Contents />
             </Content>
           </div>
+          <Footer >
+            <NewNotification />
+          </Footer>
         </Content>
       </Layout>
     </div>

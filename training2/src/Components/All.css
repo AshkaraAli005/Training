@@ -79,7 +79,7 @@
 .main-content2 {
   padding: 24px;
   min-height: 280;
-  height: 85vh;
+  height: 83.5vh;
 
   overflow-y: auto;
 }
@@ -170,13 +170,12 @@
 }
 
 .medical-form {
- 
   margin: 0 auto;
   padding: 20px;
-  width:35vw;
+  width: 35vw;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-  overflow:auto;
+  overflow: auto;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
 }
 
@@ -184,4 +183,59 @@
   text-align: center;
   margin-bottom: 20px;
 }
+.ant-layout-footer {
+  padding: 10px;
+}
+.ant-float-btn-default .ant-float-btn-body {
+  background-color: #f3f3f3;
+  color: #000000;
+}
 
+.ant-float-btn-icon {
+  font-size: 30px;
+  color: #000000;
+}
+
+.ant-btn.ant-btn-circle.ant-btn-lg {
+  min-width: 50px;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+  border-radius: 50%;
+  min-height: 50px;
+}
+
+.ant-drawer .ant-drawer-title {
+  flex: 1;
+  margin: 0;
+  color: rgb(35 121 34 / 88%);
+  font-weight: 600;
+  font-size: 23px;
+  line-height: 1.5;
+  font-family: sans-serif;
+}
+
+.isRead {
+  padding-left: 20px;
+  border-radius: 7px;
+  margin-top: 10px;
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.1);
+  background-color: white;
+  color: grey;
+}
+.isNotRead {
+  padding-left: 10px;
+  border-radius: 7px;
+  margin-top: 10px;
+  background-color: #e3dc00;
+}
+.ant-list .ant-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  color: rgba(0, 0, 0, 0.88);
+}
+.icon {
+  margin-right: 10px;
+  font-size: 20px;
+}

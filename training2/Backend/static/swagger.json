@@ -1,0 +1,365 @@
+{
+    "components": {
+      "schemas": {
+        
+        "loginRequest": {
+          "type": "object",
+          "example": {
+            "username": "admin",
+            "password": "Pass"
+          }
+        },
+        "addproduct": {
+          "type": "object",
+          "example": {
+            "name": "box",
+            "price":"200",
+            "qty": "9",
+            "des":"super product"
+          }
+        },
+        "createUserRequest": {
+          "type": "object",
+          "example": {
+            "username": "",
+            "password": "",
+            "email":""
+          }
+        }
+        
+      },
+      "securitySchemes": {
+        "basicAuth": {
+          "type": "http",
+          "scheme": "basic"
+        },
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+       
+      }
+    },
+    "info": {
+      "description": "project Documentation",
+      "version": "1.0.0",
+      "title": "FLASK PROJECT UI OUTLOOK"
+    },
+    "openapi": "3.0.0",
+    "paths": {
+      "/login": {
+        "post": {
+          "security": [
+            {
+              "basicAuth": []
+            }
+          ],
+          "tags": [
+            "User Management"
+          ],
+          "summary": "Returns JWT Token if valid user.",
+          "requestBody": {
+            "description": "for authorization.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/loginRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK"
+             }
+          }
+        }
+      },
+      "/register": {
+        "post": {
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "tags": [
+            "User Management"
+          ],
+          "summary": "Create new User.",
+          "requestBody": {
+            "description": "Create new User.",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/createUserRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "OK"
+              
+            }
+          }
+        }
+      },
+      "/token": {
+        "get": {
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "tags": [
+            "User Management"
+          ],
+          "summary": "JSON WEB TOKEN",
+          
+          "responses": {
+            "200": {
+              "description": "OK"
+             
+            }
+          }
+        }
+      },
+      "/token/refresh": {
+        "get": {
+          "security": [
+            {
+              "bearerAuth": []
+            }
+          ],
+          "tags": [
+            "User Management"
+          ],
+          "summary": "token refresh  details.",
+          
+          "responses": {
+            "200": {
+              "description": "OK"
+              
+            }
+          }
+        }
+      },
+    
+    "/add": {
+      "post": {
+          "security": [
+              {
+                  "bearerAuth": []
+              }
+          ],
+          "tags": [
+              "Product Management"
+          ],
+          "summary": "Add new product.",
+          "requestBody": {
+              "description": "Create new product",
+              "required": true,
+              "content": {
+                  "application/json": {
+                      "schema": {
+                          "$ref": "#/components/schemas/addproduct"
+                      }
+                  }
+              }
+          },
+          "responses": {
+              "200": {
+                  "description": "OK"
+              }
+          }
+      }
+  },
+  "/showall": {
+    "get": {
+        "security": [
+            {
+                "bearerAuth": []
+            }
+        ],
+        "tags": [
+            "Product Management"
+        ],
+        "summary": "Show all product.",
+        "parameters":[
+          {
+            "name":"page",
+            "in":"query",
+            "required":false,
+            "description": "to see specified page",
+            "type":"integer"
+          },
+          {
+            "name":"per_page",
+            "in":"query",
+            "required":false,
+            "description": "to see number of item in  per page",
+            "type":"integer"
+          }
+        ],
+        "responses": {
+            "200": {
+                "description": "OK"
+            }
+        }
+    }
+},
+
+"/show/{id}": {
+  "get": {
+      "security": [
+          {
+              "bearerAuth": []
+          }
+      ],
+      "tags": [
+          "Product Management"
+      ],
+      "summary": "Show by product id.",
+      "parameters":[
+        {
+          "name":"id",
+          "in":"path",
+          "required":true,
+          "description": "to see specified product",
+          "type":"integer"
+        }
+      ],
+      "responses": {
+          "200": {
+              "description": "OK"
+          }
+      }
+  }
+},
+"/upd/{id}": {
+  "put": {
+      "security": [
+          {
+              "bearerAuth": []
+          }
+      ],
+      "tags": [
+          "Product Management"
+      ],
+      "summary": "update by product id.",
+      "parameters":[
+        {
+          "name":"id",
+          "in":"path",
+          "required":true,
+          "description": "update product",
+          "type":"integer"
+        }
+      ],
+      "requestBody": {
+        "description": "update product",
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/addproduct"
+                }
+            }
+        }
+    },
+      "responses": {
+          "200": {
+              "description": "OK"
+          }
+      }
+  }
+},
+"/del/{id}": {
+  "delete": {
+      "security": [
+          {
+              "bearerAuth": []
+          }
+      ],
+      "tags": [
+          "Product Management"
+      ],
+      "summary": "delete product by id.",
+      "parameters":[
+        {
+          "name":"id",
+          "in":"path",
+          "required":true,
+          "description": "delete product",
+          "type":"integer"
+        }
+      ],
+      "responses": {
+          "200": {
+              "description": "OK"
+          }
+      }
+  }
+},
+"/partial_upd/{id}": {
+  "patch": {
+      "security": [
+          {
+              "bearerAuth": []
+          }
+      ],
+      "tags": [
+          "Product Management"
+      ],
+      "summary": "partial update by product id.",
+      "parameters":[
+        {
+          "name":"id",
+          "in":"path",
+          "required":true,
+          "description": "partial update product",
+          "type":"integer"
+        }
+      ],
+      "requestBody": {
+        "description": "partial update product",
+        "required": true,
+        "content": {
+            "application/json": {
+                "schema": {
+                    "$ref": "#/components/schemas/addproduct"
+                }
+            }
+        }
+    },
+      "responses": {
+          "200": {
+              "description": "OK"
+          }
+      }
+  }
+},
+
+"/cors": {
+  "get": {
+      "security": [
+          {
+              "bearerAuth": []
+          }
+      ],
+      "tags": [
+          "Cross_Origin resourse sharing"
+      ],
+      "summary": "return cors",
+      "responses": {
+          "200": {
+              "description": "OK"
+          }
+      }
+  }
+}
+  },
+    "swagger": "3.0"
+  }

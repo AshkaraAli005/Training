@@ -1,5 +1,5 @@
 import React from "react";
-import SpeechToText from "../Speech";
+import SpeechToText from "../Authentication/Speech";
 import { Form, Input, Select, Button } from "antd";
 import InpText from "../FormFields/FormInputComonent";
 import Server from "./Server";
@@ -37,8 +37,8 @@ const Assessment2 = () => {
           <h1>{Topic}</h1>
           <InpText name="Medical Detail 1" />
           <InpText name="Medical Detail 2" />
-          <TextArea name="Description 1"/>
-          <TextArea name="Description 2"/>
+          <TextArea name="Description 1" />
+          <TextArea name="Description 2" />
           <Form.Item wrapperCol={{ offset: 0, span: 24 }}>
             <Button type="primary" htmlType="submit">
               Submit
