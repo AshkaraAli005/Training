@@ -1,9 +1,10 @@
 import React from "react";
-import SpeechToText from "../Authentication/Speech";
+
 import TextArea from "../FormFields/TextareaInput";
 import InpText from "../FormFields/FormInputComonent";
 import { Button, Form } from "antd";
 import Server from "./Server";
+import SpeechToText from "../SpeechToText/speectToText";
 
 const Assessment1 = () => {
   const [form] = Form.useForm();

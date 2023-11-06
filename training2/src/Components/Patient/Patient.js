@@ -8,6 +8,7 @@ import {
   Image,
   Popconfirm,
   Modal,
+  Avatar,
 } from "antd";
 import { Content, Header, Footer } from "antd/es/layout/layout";
 import { Route, Routes, useNavigate } from "react-router-dom";
@@ -22,9 +23,11 @@ import {
   HomeOutlined,
   ProfileOutlined,
   InfoCircleFilled,
+  UserOutlined,
 } from "@ant-design/icons";
 import NewNotification from "../../notification/NewNotification";
-
+import ProfileContent from "../ProfileDropdown/ProfileContent";
+import Dropdown from "../ProfileDropdown/Dropdown";
 
 const Patient = () => {
   const [selectedkey, setket] = useState("/Mainpage/Appointments");
@@ -168,6 +171,11 @@ const Patient = () => {
                     <Headers />
                   </Typography.Title>
                 </div>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                >
+                  <Dropdown /> <Avatar size="large" icon={<UserOutlined />} />
+                </div>
               </Header>
             </Layout>
             <Content
@@ -179,7 +187,7 @@ const Patient = () => {
               <Contents />
             </Content>
           </div>
-          <Footer >
+          <Footer>
             <NewNotification />
           </Footer>
         </Content>
@@ -196,27 +204,51 @@ const Headers = () => {
       <Routes>
         <Route
           path="/Dashboard"
-          element={<h2 className="head_text">Dashboard</h2>}
+          element={
+            <div>
+              <h2 className="head_text">Dashboard</h2>
+            </div>
+          }
         ></Route>
         <Route
           path="/Assessments"
-          element={<h2 className="head_text">Assessments</h2>}
+          element={
+            <div>
+              <h2 className="head_text">Dashboard</h2>
+            </div>
+          }
         ></Route>
         <Route
           path="/Health_Info"
-          element={<h2 className="head_text">Health Info</h2>}
+          element={
+            <div>
+              <h2 className="head_text">Health Info</h2>
+            </div>
+          }
         ></Route>
         <Route
           path="/Appointments"
-          element={<h2 className="head_text">Appointments</h2>}
+          element={
+            <div>
+              <h2 className="head_text">Appoinments</h2>
+            </div>
+          }
         ></Route>
         <Route
           path="/SubcPlans"
-          element={<h2 className="head_text">Subscription Plans</h2>}
+          element={
+            <div>
+              <h2 className="head_text">Subscription Plans</h2>
+            </div>
+          }
         ></Route>
         <Route
           path="/Profile"
-          element={<h2 className="head_text">Profile</h2>}
+          element={
+            <div>
+              <h2 className="head_text">Profile</h2>
+            </div>
+          }
         ></Route>
       </Routes>
     </div>

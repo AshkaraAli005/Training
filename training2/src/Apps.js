@@ -6,7 +6,7 @@ import Patient from "./Components/Patient/Patient";
 import Doctor from "./Components/Doctor/Doctors";
 import { App } from "antd";
 import "./App.css";
-
+import Dropdown from "./Components/ProfileDropdown/Dropdown"
 const Apps = () => {
   return (
     <div className="App">
@@ -25,6 +25,7 @@ const Apps = () => {
           <Route path="patient/*" element={<Patient />}></Route>
         </Route>
       </Routes>
+      {/* <Dropdown /> */}
     </div>
   );
 };
