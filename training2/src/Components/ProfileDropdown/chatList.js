@@ -1,5 +1,5 @@
 import React from "react";
-import { Divider, List, Typography } from "antd";
+import { List } from "antd";
 import {
   ArrowRightOutlined,
   CalendarOutlined,
@@ -8,29 +8,62 @@ import {
   ReconciliationOutlined,
   UserOutlined,
 } from "@ant-design/icons";
+import { Link } from "react-router-dom";
 const data = [
-  { icon: <UserOutlined />, name: "Account" },
-  { icon: <ReconciliationOutlined />, name: "Assessment" },
-  { icon: <CalendarOutlined />, name: "Consultation" },
-  { icon: <ProfileOutlined />, name: "Health Records" },
-  { icon: <CrownOutlined />, name: "Membership Plans" },
-  { icon: <ProfileOutlined />, name: "Prescription" },
-  { icon: <ProfileOutlined />, name: "Orders" },
+  { icon: <UserOutlined />, name: "Account", link: "Profile" },
+  {
+    icon: <ReconciliationOutlined />,
+    name: "Assessment",
+    link: "Assessments",
+  },
+  {
+    icon: <CalendarOutlined />,
+    name: "Consultation",
+    link: "consultation",
+  },
+  {
+    icon: <ProfileOutlined />,
+    name: "Health Records",
+    link: "Health_Info",
+  },
+  {
+    icon: <CrownOutlined />,
+    name: "Membership Plans",
+    link: "SubcPlans",
+  },
+  {
+    icon: <ProfileOutlined />,
+    name: "Prescription",
+    link: "Your_prescriptions",
+  },
+  { icon: <ProfileOutlined />, name: "Orders", link: "YourOrders" },
 ];
 const ChatList = () => (
-  <div style={{ height: "250px", overflowY: "scroll" }} className="lists">
+  <div style={{ height: "243px", overflowY: "scroll" }} className="lists">
     <List
-      size={64}
+      size="small"
       bordered
+      style={{ borderRadius: "5px" }}
       dataSource={data}
       renderItem={(item) => (
-        <List.Item style={{backgroundColor:"white"}}>
-          <div style={{ display: "flex", flexDirection: "row", gap: "10px",alignItems:"center" }}>
-            <div style={{ color: "green", font: "bold",fontSize:"20px" }}>{item.icon}</div>
-            <div>{item.name}</div>
-          </div>
-          <ArrowRightOutlined />
-        </List.Item>
+        <Link to={`/patient/${item.link}`}>
+          <List.Item style={{ backgroundColor: "white" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: "10px",
+                alignItems: "center",
+              }}
+            >
+              <div style={{ color: "green", font: "bold", fontSize: "20px" }}>
+                {item.icon}
+              </div>
+              <div>{item.name}</div>
+            </div>
+            <ArrowRightOutlined />
+          </List.Item>
+        </Link>
       )}
     />
   </div>

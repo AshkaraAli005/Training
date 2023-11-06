@@ -11,7 +11,7 @@ const Apps = () => {
   return (
     <div className="App">
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={
             <App message={{ maxCount: 1 }}>
@@ -20,10 +20,10 @@ const Apps = () => {
           }
         />
         <Route path="/signup" element={<Register />} />
-        <Route element={<PrivateRoute />}>
-          <Route path="doctor/*" element={<Doctor />}></Route>
+        <Route element={<PrivateRoute />}>*/}
+          <Route path="doctor/*" element={<Doctor />}></Route> 
           <Route path="patient/*" element={<Patient />}></Route>
-        </Route>
+        {/* </Route> */}
       </Routes>
       {/* <Dropdown /> */}
     </div>

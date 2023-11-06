@@ -227,7 +227,7 @@
   padding-left: 10px;
   border-radius: 7px;
   margin-top: 10px;
-  background-color: #e3dc00;
+  background-color: rgba(205, 205, 205, 0.404);
 }
 .ant-list .ant-list-item {
   display: flex;
@@ -242,14 +242,17 @@
 }
 .ant-popover .ant-popover-inner {
   height: 500px;
-  width: 400px;
+  width:350px;
   margin-right: 20px;
 }
 .ant-popover .ant-popover-inner {
-  background-color:#F3E9E9;
+  background-color: rgb(231, 229, 229);
 }
 /* Hide scrollbar for Chrome, Safari and Opera */
 .lists::-webkit-scrollbar {
+  display: none;
+}
+.main-content2::-webkit-scrollbar {
   display: none;
 }
 
@@ -260,4 +263,10 @@
 }
 .ant-layout .ant-layout-header {
   padding-right: 20px;
+}
+
+.ant-list-split .ant-list-item {
+  border-block-end: 10px solid rgba(0, 0, 0, 0.203);
+  border-radius: 5px;
+  border:1px solid rgba(0, 0, 0, 0.203);
 }

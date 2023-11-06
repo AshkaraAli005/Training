@@ -1,5 +1,5 @@
 import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Button } from "antd";
+import { Avatar, Button, Typography } from "antd";
 import React from "react";
 import ChatList from "./chatList";
 
@@ -16,21 +16,34 @@ const ProfileContent = () => {
         <Avatar
           size={64}
           icon={<UserOutlined />}
-          style={{ marginRight: "20px" }}
+          style={{ marginRight: "14px" }}
         />
         <div>
-          <h3 style={{ margin: 0 }}>I'm Clara</h3>
-          <span style={{ margin: 0 }}>Care Navigator</span>
+          <Typography
+            style={{ margin: 0, fontSize: "18px", fontWeight: "bolder" }}
+          >
+            I'm Clara
+          </Typography>
+          <span
+            style={{ margin: 0, fontFamily: "sans-serif", fontSize: "14px" }}
+          >
+            Care Navigator
+          </span>
         </div>
       </div>
-      <p>Hello ask me a question or Select one option Below</p>
-      <h3>How can we Help you ?</h3>
+      <p style={{ fontFamily: "sans-serif", fontSize: "14px" }}>
+        Hello ask me a question or Select one option Below
+      </p>
+      <h3 style={{ fontWeight: "bold", fontFamily: "sans-serif" }}>
+        How can we Help you ?
+      </h3>
 
       <ChatList />
+
       <Button
         style={{
           width: "300px",
-          margin: "20px 10px 10px 30px",
+          margin: "25px 5px 5px 15px",
           backgroundColor: "green",
           color: "white",
         }}

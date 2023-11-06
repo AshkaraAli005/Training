@@ -21,25 +21,25 @@ const NotificationList = ({ onNotificationClick, data, setdata }) => {
                 {item.status === "error" && (
                   <CloseCircleFilled
                     className="icon"
-                    style={{ color: "red" }}
+                    style={{ color: "rgba(255,0,0,0.5)" }}
                   />
                 )}
                 {item.status === "info" && (
                   <InfoCircleFilled
                     className="icon"
-                    style={{ color: "blue" }}
+                    style={{ color: "	rgba(0,0,255,0.6)" }}
                   />
                 )}
                 {item.status === "success" && (
                   <CheckCircleFilled
                     className="icon"
-                    style={{ color: "green" }}
+                    style={{ color: "rgba(0,255,0,0.5)" }}
                   />
                 )}
                 {item.status === "warning" && (
                   <InfoCircleFilled
                     className="icon"
-                    style={{ color: "#e3dc00" }}
+                    style={{ color: "rgba(255,255,0,0.7)" }}
                   />
                 )}
                 <Link

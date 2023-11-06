@@ -172,7 +172,7 @@ const Patient = () => {
                   </Typography.Title>
                 </div>
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                  style={{ display: "flex", alignItems: "center", gap: "15px" }}
                 >
                   <Dropdown /> <Avatar size="large" icon={<UserOutlined />} />
                 </div>
